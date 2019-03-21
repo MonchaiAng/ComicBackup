@@ -1,0 +1,23 @@
+table,td, th {
+  font-family: arial, sans-serif;
+  border-collapse: collapse;
+  cursor:pointer; 
+  text-align: left;
+  padding: 2px;
+}
+.brief {
+	color:white;
+}
+.trEp:hover {
+	/*background-color:#33ff33*/
+	background-color: #cdeff9;
+}
+
+.table_div {
+	display: inline-block;
+}
+
+.demo {
+	text-align: left;
+}
+

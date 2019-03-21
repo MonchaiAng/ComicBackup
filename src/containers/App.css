@@ -1,0 +1,123 @@
+@font-face {
+font-family: 'SEGA LOGO FONT';
+font-style: normal;
+font-weight: normal;
+src: local('SEGA LOGO FONT'), url('SEGA.woff') format('woff');
+}
+body {
+  font-family: Helvetica, sans-serif;
+}
+a,h1,h2,h3{
+	/*font-family: 'SEGA LOGO FONT';*/
+  font-family: 'PT Sans', sans-serif;
+	font-weight: 400;
+	color: white;/*color:#0ccac4;*/
+}
+button {
+  cursor: pointer;
+}
+.decorate {
+	cursor: pointer;
+  border: 3px solid #f1f1f1;
+}
+ul {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+}
+.li_Na {
+  float: left;
+}
+
+li a {
+  display: block;
+  text-align: center;
+  padding: 14px 16px;
+  text-decoration: none;
+}
+
+li a:hover:not(.active) {
+  -webkit-animation: random 10s infinite;
+}
+
+.active {
+  background-color: #128497;
+}
+.App {
+  text-align: center;
+}
+
+.center {
+  display: flex;
+  justify-content: center;
+}
+
+.particles {
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  z-index: -1;
+}
+
+.react-autosuggest__container {
+  position: relative;
+  display: inline-block;
+  float: right;
+  padding: 1px 20px;
+}
+
+.react-autosuggest__input {
+  width: 240px;
+  height: 40px;
+  padding: 10px 20px;
+  font-family: Helvetica, sans-serif;
+  font-weight: 300;
+  font-size: 16px;
+  border: 1px solid #aaa;
+  background-color: #cdeff9;
+}
+
+.react-autosuggest__input--focused {
+  outline: none;
+}
+
+.react-autosuggest__input--open {
+  border-bottom-left-radius: 0;
+  border-bottom-right-radius: 0;
+}
+
+.react-autosuggest__suggestions-container {
+  display: none;
+}
+
+.react-autosuggest__suggestions-container--open {
+  display: block;
+  position: absolute;
+  width: 240px;
+  border: 1px solid #aaa;
+  background-color: #cdeff9;
+  font-family: Helvetica, sans-serif;
+  font-weight: 300;
+  font-size: 16px;
+  border-bottom-left-radius: 4px;
+  border-bottom-right-radius: 4px;
+  z-index: 2;
+  float: flex-end;
+}
+
+.react-autosuggest__suggestions-list {
+  margin: 0;
+  padding: 0;
+  list-style-type: none;
+}
+
+.react-autosuggest__suggestion {
+  cursor: pointer;
+  padding: 10px 20px;
+}
+
+.react-autosuggest__suggestion--highlighted {
+  background-color: #ddd;
+}
