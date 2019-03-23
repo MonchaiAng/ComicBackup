@@ -15,6 +15,10 @@ import DropListEpisodes from '../components/dropListEpisodes';
 // import InfoData from '../components/InfoData';
 // import EpComment from '../components/EpComment';
 import AllEp from '../components/AllEp';
+import { BrowserRouter as Router, Route, Link, Switch } from "react-router-dom";
+import Home from '../components/Home';
+import Sort from '../components/Sort';
+import { createBrowserHistory } from 'history';
 import './App.css';
 
 const particlesOptions = {
@@ -78,6 +82,7 @@ class App extends Component{
 	      	route: 'home',
       		isSignedIn: false,
       		idComic:0,
+      		idEp:0,
 			items: [],
 			user: {
 		       	id: '',
@@ -221,6 +226,8 @@ class App extends Component{
 	    this.setState({route: route});
 	    if(route === 'allep'){
 	    	this.setState({idComic:id})
+	    }else if(route === 'ep'){
+	    	this.setState({idEp:id})
 	    }
 
     }
@@ -244,7 +251,7 @@ class App extends Component{
 	  };
 	render() {		
 		
-		const { isSignedIn, searchfield, data, route, dataEp, idComic } = this.state;
+		const { isSignedIn, searchfield, data, route, dataEp, idComic, idEp } = this.state;
 		// const filteredRobots = robots.filter(robot =>{
 		// 	return robot.name.toLowerCase().includes(searchfield.toLowerCase());
 		// })
@@ -257,44 +264,49 @@ class App extends Component{
 	      value,
 	      onChange: this.onChange
 	    };
+	    const history = createBrowserHistory();
+	    const location = history.location;
+
+		// Listen for changes to the current location.
+		const unlisten = history.listen((location, action) => {
+		  // location is an object like window.location
+		  console.log(action, location.pathname, location.state);
+		});
 		return(
-	      <div>    
+	      <div>   
+	      	<Navigation/>
+	      	<Autosuggest 
+		        suggestions={suggestions}
+		        onSuggestionsFetchRequested={this.onSuggestionsFetchRequested}
+		        onSuggestionsClearRequested={this.onSuggestionsClearRequested}
+		        getSuggestionValue={getSuggestionValue}
+		        renderSuggestion={renderSuggestion}
+		        inputProps={inputProps} 
+			/>
 	        { route === 'home'?
 				(
 					<div>
-						<Navigation/>
 						{/*<SearchBox searchChange={this.onSearchChange}/>*/}
-						<Autosuggest 
-					        suggestions={suggestions}
-					        onSuggestionsFetchRequested={this.onSuggestionsFetchRequested}
-					        onSuggestionsClearRequested={this.onSuggestionsClearRequested}
-					        getSuggestionValue={getSuggestionValue}
-					        renderSuggestion={renderSuggestion}
-					        inputProps={inputProps} 
-					    />
 					    <br/><br/><br/><br/> 
-						{/*<h1 className ='tc'>Recommendation</h1>
+						<h1 className ='tc'>Recommendation</h1>
 						<Slideshow style={{width: '1000px'}}/>
-						<UpdateHistory data = {filteredData} onRouteChange={this.onRouteChange}/>*/}
-						<DropListEpisodes/>
+						<UpdateHistory data = {filteredData} onRouteChange={this.onRouteChange}/>
 					</div>
 				)
 	        	:route === 'allep'?
 				(
 					<div>
-						<Navigation/>
-						<Autosuggest 
-					        suggestions={suggestions}
-					        onSuggestionsFetchRequested={this.onSuggestionsFetchRequested}
-					        onSuggestionsClearRequested={this.onSuggestionsClearRequested}
-					        getSuggestionValue={getSuggestionValue}
-					        renderSuggestion={renderSuggestion}
-					        inputProps={inputProps} />
 					        <br/><br/><br/><br/> 
-						<AllEp data={data[idComic.id]} dataEp={dataEp[idComic.id]}/>
+						<AllEp data={data[idComic.id]} dataEp={dataEp[idComic.id]} onRouteChange={this.onRouteChange}/>
 					</div>
 				)
-				:	
+				:route === 'ep'?
+				(
+					<div>
+						<DropListEpisodes id={idComic.id} ep={idEp.ch}/>
+					</div>
+				)
+				:
 	        	(
 	             route === 'signin'
 	             ? <div>

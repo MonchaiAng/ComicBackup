@@ -6,6 +6,10 @@
   border: none;
   min-width: 300px;
 }
+.page{
+  color:white;
+  line-height: 0px;
+} 
 .all{
   /*position: static;*/
   padding-left: 200px;

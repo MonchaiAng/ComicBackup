@@ -6,14 +6,14 @@ const EpList =({data}) =>{
         <div>
             {
                 data.map((user,i) =>{ 
-                return (
-                    <Ep 
-                        key ={i} 
-                        id={data[i].id} 
-                        name={data[i].name} 
-                        img={data[i].img} 
-                    />
-                );
+                    return (
+                        <Ep 
+                            key ={i} 
+                            id={data[i].id} 
+                            name={data[i].name} 
+                            img={data[i].img} 
+                        />
+                    );
                 })
             }
         </div>

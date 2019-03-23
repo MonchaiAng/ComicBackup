@@ -1,10 +1,29 @@
 import React from 'react';
 import './dropListEpisodes.css';
-import image from '../../img';
+import logo from '../img/0_1_1.svg';	
+import logo1 from '../img/0_1_2.svg';	
+import logo2 from '../img/0_1_3.svg';
+// var imageName = require('../img/page1.svg')
+let dir = '../img';
 
+// const dropListEpisodes = ({id, ep}) => {
+class dropListEpisodes extends React.Component {
+	constructor(props) {
+		super(props);
+  	}
 
-const dropListEpisodes = () => {
+  	render(){
+	const { id ,ep } = this.props;
+	let b = JSON.stringify({id}.id)
+	b = JSON.parse(b);
+	let c = JSON.stringify({ep}.ep)
+	let a = b+'_'+c+'_';
+	a = a+'1.svg';    
+	a = a.toString();
+	let z = '../img/'+a;
+	var imageName = require('../img/'+a);
     return(
+    	<div >
     	<div class="all">
     		<h1>Demo Name Cartoon</h1>	
     		<ul>
@@ -37,12 +56,18 @@ const dropListEpisodes = () => {
 			      <a href="#">Ep.3:End</a>
 			    </li>
 		    </ul>
-		    <h3 align="center">All page</h3>
-		    <img  width = '750px' height='1000px' />
-		    <br/><br/>
-			<img src= "http://3.bp.blogspot.com/-nNciHqkyVV0/UFtReavlnHI/AAAAAAACIVQ/Roz6ENnkons/s1600/Niceoppai_002.jpg" width = '750px' height='1000px' />
+		</div>
+			<div className="tc">
+			    <h3 align="center">All page</h3>
+			    <img src={imageName}/>
+			    <p className="page">1/30</p>
+			    <img src={imageName} />
+			    <p className="page">2/30</p>
+			    <img src={imageName} />
+			    <p className="page">3/30</p>
+			</div>
 		</div>
     );
 };
-
+}
 export default dropListEpisodes;
