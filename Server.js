@@ -84,7 +84,7 @@ app.use(bodyParser.urlencoded({ extended: true }));
 			MongoClient.connect(url, (err, db) => { 
     		db.collection("user", (error, collection) => {
 					collection.findOne({email:req.body.user},function(err, document) {
-						res.json(document.history)
+						res.json(document.history[0])
 					}); 
 			   });
 			});
@@ -93,7 +93,8 @@ app.use(bodyParser.urlencoded({ extended: true }));
 		app.post('/history2',(req,res)=>{
 			MongoClient.connect(url, (err, db) => { 
     		db.collection("epbook", (error, collection) => {
-					collection.find({_id:req.body.history2}).toArray(function(err, document) {
+					collection.find({_id:req.body.history1}).toArray(function(err, document) {
+						console.log(req.body.history1);
 						res.json(document)
 					}); 
 			   });

@@ -13,7 +13,6 @@ class Card extends React.Component {
   	}
   	render(){
   		const { _id,id ,name ,img ,brief,ch } = this.props;
-  		console.log({img})
 		return(		//decorate
 			<div className ='tc bg-light-green dib br3 pa2 ma2 grow bw2 shadow-5 container' style = {{ width:'200px', height:'280px'}}>	
 				<img alt='comics' src= {img} width = '185px' height='265px' />

@@ -22,6 +22,7 @@ class Home extends Component{
 	      	epcomic:[],
 	      	allepcomic:[],
 	      	history:1,
+	      	history1:1,
 	      	history2:[],
 	      	storehistory:[],
       		isSignedIn: false,
@@ -105,17 +106,17 @@ componentWillMount() {
      
 }
 waithistory(){
+	let a = this.state.history1;
 	fetch('http://localhost:3000/history2', {		//find ep from history
       method: 'post',
       headers: {'Content-Type': 'application/json'},
        body: JSON.stringify({
-        history2: this.state.history
+        history1: a
       })
     })
     .then(response => response.json())
     .then(data => {
       this.setState({history2:data})
-      console.log(this.state.history2)
     })
 }
 
@@ -123,7 +124,7 @@ waithistory(){
 		const { isSignedIn, searchfield, data, route, dataEp, idComic, idEp, comic, epcomic, allepcomic, history, history2 } = this.state;
 		const { user } = this.props;
 		// console.log({user}.user)
-		console.log({epcomic})
+		// console.log({epcomic})
 		// console.log({history})
 		// console.log({user})
 		// console.log({history2})
