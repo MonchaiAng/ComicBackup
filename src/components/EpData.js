@@ -10,7 +10,7 @@ const EpData = ({data, dataEp, onRouteChange}) => {
 							return (
 							<EpDataList 
 								key ={i}
-								id={data.id}
+								id={dataEp[i].id}
 								ch={dataEp[i].ch} 
 								img={dataEp[i].img}
 								date={dataEp[i].date}

@@ -10,9 +10,12 @@ const Push = ({ data, onRouteChange}) => {
 					return (
 						<Card 
 							key ={i}
+							_id={data[i]._id}
 							id={data[i].id} 
+							ch={data[i].ch}
 							name={data[i].name} 
 							img={data[i].img}
+							brief={data[i].brief}
 							onRouteChange={onRouteChange}
 						/>
 					);

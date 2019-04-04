@@ -10,7 +10,9 @@ const EpList =({data}) =>{
                         <Ep 
                             key ={i} 
                             id={data[i].id} 
+                            namebook={data[i].namebook}
                             name={data[i].name} 
+                            view={data[i].view}
                             img={data[i].img} 
                         />
                     );

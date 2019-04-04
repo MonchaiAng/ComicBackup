@@ -1,7 +1,7 @@
 import React from 'react';
 import '../containers/BoxEp.css';
 
-const Ep =({id ,name ,img}) =>{
+const Ep =({id ,name,namebook ,img, view}) =>{
 	return(
 		<div>
 			<div className='table_div'>
@@ -11,10 +11,10 @@ const Ep =({id ,name ,img}) =>{
 							<img alt='comics' src= {img} width = '70px' height='70px' />
 						</td>
 						<td width = '40%'>
-							<p className = 'tl'>{name}</p>
+							<p className = 'tl'>{namebook} {name}</p>
 						</td>
 						<td width = '30%'>
-							<p className = 'tr'>Subscribe</p>
+							<p className = 'tr'>{view}</p>
 						</td>
 						<td width = '5%'>
 						</td>

@@ -2,7 +2,9 @@ import React from 'react';
 import InfoData from '../components/InfoData';
 import EpComment from '../components/EpComment';
 
-const AllEp = ({data ,dataEp, onRouteChange}) => {
+const AllEp = ({data ,dataEp, onRouteChange}) => {	
+	console.log("AllEp")
+	console.log({dataEp})
 	return (
 		<div>
 			<InfoData data = {data}/>

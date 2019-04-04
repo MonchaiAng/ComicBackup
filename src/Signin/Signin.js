@@ -1,11 +1,14 @@
 import React from 'react';
-
+import Navigation2 from '../components/Navigation2';
+import Navigation from '../components/Navigation';
 class Signin extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
       signInEmail: '',
-      signInPassword: ''
+      signInPassword: '',
+      route:'',
+      comic:''
     }
   }
 
@@ -29,66 +32,92 @@ class Signin extends React.Component {
     .then(response => response.json())
     .then(data => {
       if(data === 'success'){
-         this.props.onRouteChange('home');
+         // this.props.onRouteChange('home');
+         this.setState({comic:this.state.signInEmail});
+         this.setState({route: 'home'});
       }
     })
-      // if(this.state.signInEmail==='asd'&&this.state.signInPassword==='asd'){
-      // if (user.id){
-      //   alert(user);
-      //   this.props.loadUser(user)
-       
-      // }
-    // }
-    //   else{
-    //     alert('Incorrect email or password');
-    //   }
+
+
+    // fetch('http://localhost:3000/book', {
+    //   method: 'get',
+    //   headers: {'Content-Type': 'application/json'},
     // })
+    // .then(response => response.text())
+    // .then(data => {
+    //   this.setState({comic:data})
+    // })
+
+  }
+
+  onSigninRouteChange = (route,id) => {
+      if (route === 'home') {
+        this.setState({isSignedIn: true})
+      }
+      this.setState({route: route});
+      if(route === 'allep'){
+        this.setState({idComic:id})
+      }else if(route === 'ep'){
+        this.setState({idEp:id})
+      }
   }
 
   render() {
-    const { onRouteChange } = this.props;
+    const { isSignedIn,onRouteChange } = this.props;
+    const { route,comic } = this.state;
     return (
-      <article className="br3 ba b--white-10 mv4 w-100 w-50-m w-25-l mw6 shadow-5 center">
-        <main className="pa4 white-80">
-          <div className="measure">
-            <fieldset id="sign_up" className="ba b--transparent ph0 mh0 ">
-              <legend className="f1 fw6 ph0 mh0 center">Sign In</legend>
-              <div className="mt3">
-                <label className="db fw6 lh-copy f4" htmlFor="email-address">Email</label>
-                <input
-                  className="pa2 b--white input-reset ba bg-transparent hover-bg-black hover-white  w-100"
-                  type="email"
-                  name="email-address"
-                  id="email-address"
-                  onChange={this.onEmailChange}
-                />
-              </div>
-              <div className="mv3">
-                <label className="db fw6 lh-copy f4" htmlFor="password">Password</label>
-                <input
-                  className="b b--white pa2 input-reset ba bg-transparent hover-bg-black hover-white w-100"
-                  type="password"
-                  name="password"
-                  id="password"
-                  onChange={this.onPasswordChange}
-                />
-              </div>
-            </fieldset>
-            <div className="tc">
-              <input
-                onClick={this.onSubmitSignIn}
-                // onClick={() => onRouteChange('home')}
-                className="white b--white b ph3 pv2 input-reset ba b--black bg-transparent grow pointer f6 dib"
-                type="submit"
-                value="Sign in"
-              />
-            </div>
-            <div className="tc lh-copy mt3">
-              <p  onClick={() => onRouteChange('register')} className="f4 link dim white db pointer">Register</p>
-            </div>
+      <div>
+        {
+          route === 'home'?
+          (
+            <Navigation comic={comic}/>
+          ):
+          <div>
+            <Navigation2 isSignedIn={isSignedIn} onRouteChange={onRouteChange}/>
+            <article className="br3 ba b--white-10 mv4 w-100 w-50-m w-25-l mw6 shadow-5 center">
+              <main className="pa4 white-80">
+                <div className="measure">
+                  <fieldset id="sign_up" className="ba b--transparent ph0 mh0 ">
+                    <legend className="f1 fw6 ph0 mh0 center">Sign In</legend>
+                    <div className="mt3">
+                      <label className="db fw6 lh-copy f4" htmlFor="email-address">Email</label>
+                      <input
+                        className="pa2 b--white input-reset ba bg-transparent hover-bg-black hover-white  w-100"
+                        type="email"
+                        name="email-address"
+                        id="email-address"
+                        onChange={this.onEmailChange}
+                      />
+                    </div>
+                    <div className="mv3">
+                      <label className="db fw6 lh-copy f4" htmlFor="password">Password</label>
+                      <input
+                        className="b b--white pa2 input-reset ba bg-transparent hover-bg-black hover-white w-100"
+                        type="password"
+                        name="password"
+                        id="password"
+                        onChange={this.onPasswordChange}
+                      />
+                    </div>
+                  </fieldset>
+                  <div className="tc">
+                    <input
+                      onClick={this.onSubmitSignIn}
+                      // onClick={() => onRouteChange('home')}
+                      className="white b--white b ph3 pv2 input-reset ba b--black bg-transparent grow pointer f6 dib"
+                      type="submit"
+                      value="Sign in"
+                    />
+                  </div>
+                  <div className="tc lh-copy mt3">
+                    <p  onClick={() => onRouteChange('register')} className="f4 link dim white db pointer">Register</p>
+                  </div>
+                </div>
+              </main>
+            </article>
           </div>
-        </main>
-      </article>
+        }
+        </div>
     );
   }
 }

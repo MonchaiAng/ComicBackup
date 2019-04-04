@@ -1,33 +1,31 @@
 import React from 'react';
 import './Card.css';
-import { BrowserRouter as Router, Route, Link } from "react-router-dom";
-import AllEp from '../components/AllEp';
-import Home from './Home';
+import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
+import Sort from './Sort';
+import AllEp from "./AllEp";
+import List from "./List";
 class Card extends React.Component {
 	constructor(props) {
 		super(props);
   	}
-  	onClickAllEp({id}){
-  		this.props.onRouteChange('allep',{id});
+  	onClickAllEp({ch},{id},{_id}){
+  		this.props.onRouteChange('ep',{ch},{id},{_id});
   	}
   	render(){
-  		const { id ,name ,img } = this.props;
+  		const { _id,id ,name ,img ,brief,ch } = this.props;
+  		console.log({img})
 		return(		//decorate
 			<div className ='tc bg-light-green dib br3 pa2 ma2 grow bw2 shadow-5 container' style = {{ width:'200px', height:'280px'}}>	
 				<img alt='comics' src= {img} width = '185px' height='265px' />
-				<Router>
 					<div>
-						<Link to = {name} className= 'active f3'>
-							<div onClick={() => this.onClickAllEp({id})}>
-								<div className="overlay">					
-								    <div className="text">
-								    	 Short {name} 	
-								    </div>
-								</div>			 
-							</div>	
-						</Link>
-		      		</div>
-				</Router>	
+						<div onClick={() => this.onClickAllEp({ch},{id},{_id})}>
+							<div className="overlay">					
+							    <div className="text">
+							    	 Short {name} 	
+							    </div>
+							</div>			 
+						</div>	
+		      		</div>	
 			</div>
 		);
 	}
