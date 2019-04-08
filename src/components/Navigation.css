@@ -1,7 +1,9 @@
 .user {
 	valign:bottom;
 }
-
+.asd{
+  background-color: #9da6e6;
+}
 .react-autosuggest__container {
   position: relative;
   display: inline-block;
@@ -17,7 +19,7 @@
   font-weight: 300;
   font-size: 16px;
   border: 1px solid #aaa;
-  background-color: #cdeff9;
+  background-color: #f2f1ff;
 }
 
 .react-autosuggest__input--focused {

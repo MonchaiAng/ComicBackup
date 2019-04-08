@@ -26,7 +26,7 @@ const InfoData = ({data}) => {
 							</td>
 						</div>
 							<td className = 'tr'width = '600px'>
-								<button className = 'pa2'type= 'button'>Add to Favourite</button>
+								{/*<button className = 'pa2'type= 'button'> Add to Favourite</button>*/}
 							</td>
 					</tr>
 					<div >

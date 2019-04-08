@@ -13,7 +13,6 @@ import DropEp2 from './DropEp2'
 						<div>
 							<DropEp2
 								key ={i}
-								count={1}
 								name={data[i].name}
 							/>
 						</div>

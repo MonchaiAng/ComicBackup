@@ -14,7 +14,7 @@ class Ep extends React.Component {
 		return(
 			<div>
 				<div className='table_div' onClick={() => this.onClickAllEp({ch},{id},{_id})}>
-					<table className ='bg-light-green ' width = '350px'>
+					<table className ='asd ' width = '350px'>
 						<tr className = 'trEp'>
 							<td width = '15%'>
 								<img alt='comics' src= {img} width = '70px' height='70px' />

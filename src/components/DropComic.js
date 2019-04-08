@@ -30,18 +30,21 @@ class DropComic extends React.Component {
 					</li>
 				</ul>
 				<ul class=" ep tl dropdown">
-					<li class="dropbtn">Ep:Start </li>
+					<li class="dropbtn">Ep.1:I Got into Trouble as Soon as I Arrived </li>
 						<li class="dropdown-content">
 				{
 					nameep.map((user, i) =>{
 						return (
 							<div>
-								<DropEp2
+								{/*<DropEp2
 									key ={i}
 									count={1}
 									name={nameep[i].name}
 									onRouteChange={onRouteChange}
-								/>
+								/>*/}
+								<a href="#">Ep.1:I Got into Trouble as Soon as I Arrived</a>
+								<a href="#">Ep.2:Before the Big Fight</a>
+								<a href="#">Ep.3:The Middle of the Storm</a>
 							</div>
 						);
 					})

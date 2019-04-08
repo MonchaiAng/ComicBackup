@@ -27,7 +27,7 @@ class Page extends React.Component {
 	// }
 		return(		//decorate
 			<div>	
-				<h3 align="center" className="Link_name" onClick={() => this.onClickPage()}>One Page</h3>
+				{/*<h3 align="center" className="Link_name" onClick={() => this.onClickPage()}>One Page</h3>
 				{
 					size===1?
 					(
@@ -41,7 +41,14 @@ class Page extends React.Component {
 					    <p className="page">2/30</p>
 					    <p className="page">3/30</p>
 					</div>
-				}
+				}*/}
+				<br/>
+				<img src="https://xy-10-w.mangapark.net/9a/40/5c503ecb9264df59a25f04a9/02_141748_1366_1961.webp"  height="900px"/>
+				<p className="page">1/30</p>
+				<img src="https://xy-10-w.mangapark.net/9a/40/5c503ecb9264df59a25f04a9/03_425726_2732_1961.webp"  height="900px"/>
+			    <p className="page">2/30</p>
+			    <img src="https://xy-10-w.mangapark.net/9a/40/5c503ecb9264df59a25f04a9/04_206024_1366_1961.webp"  height="900px"/>
+			    <p className="page">3/30</p>
 			    
 			</div>
 		);

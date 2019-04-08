@@ -109,6 +109,18 @@ app.use(bodyParser.urlencoded({ extended: true }));
 			});
 		});  
 
+		app.get('/sortbook',(req,res)=>{
+			MongoClient.connect(url, (err, db) => { 
+    		db.collection("book", (error, collection) => {
+					collection.find().sort({name:1})
+						.toArray(function(err, document) {
+						console.log(document);
+						res.json(document)
+					}); 
+			   });
+			});
+		});  
+
 		app.get('/epbook',(req,res)=>{
 			MongoClient.connect(url, (err, db) => { 
     		db.collection("epbook", (error, collection) => {

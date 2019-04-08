@@ -117,7 +117,7 @@ class Navigation extends Component{
 					<div>
 						<ul>
 						  <li className='li_Na'>
-						  	<Link to = "" className= 'active f3'>Comic E-book</Link>
+						  	<Link to = "" className= 'asd f3'>Comic E-book</Link>
 						  </li>
 						  <li className='li_Na'>
 						  	<Link to ="/Sort" className= 'f3'>Sort</Link>

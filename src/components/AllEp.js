@@ -8,6 +8,7 @@ const AllEp = ({data ,dataEp, onRouteChange}) => {
 	console.log({data})
 	return (
 		<div>
+			<br/>
 			<InfoData data = {data}/>
 			<EpComment data = {data} dataEp = {dataEp} onRouteChange={onRouteChange}/>
 		</div>

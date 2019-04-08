@@ -57,6 +57,7 @@ class dropListEpisodes extends React.Component {
     return(
     	<div >
 	    	<div class="tl all">
+	    		<br/>
 	    		<h1 className="tl Link_name" onClick={() => this.onClickAllEp({ep},{id})}>{namebook}</h1>	
 	    		<DropComic id={id} ep={ep} data={data} nameep={nameep} onRouteChange={this.props.onRouteChange}/>
 			</div>

@@ -9,7 +9,7 @@ const Slideshow2  =({history}) => {
 						<Slideshow3 
 							key ={i}
 							namebook = {history[i].namebook}
-							img = {history[i].img}
+							imgrec = {history[i].imgrec}
 						/>
 					);
 				})

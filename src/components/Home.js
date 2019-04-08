@@ -175,14 +175,13 @@ getTypeRecommend (){
 		
 		return(
 				<div>
-					<br/><br/><br/><br/><br/>
+					<br/><br/>
 					<Search data={comic} value={this.props.value} onRouteChange={this.onRouteChange}/>
 					{	
 						route === 'home'?
 						(
 							<div>
 								{/*<h1>{user}</h1>*/}
-								
 								<h1 className ='tc'>Recommended Manga</h1>
 								<Hot>
 									<Slideshow style={{width: '1000px'}} history={filteredData3}/>

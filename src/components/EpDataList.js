@@ -1,5 +1,5 @@
 import React from 'react';
-// import DropListEpisodes from './dropListEpisodes';
+import './Slideshow.css';
 import { BrowserRouter as Router, Route, Link } from "react-router-dom";
 
 class EpDataList extends React.Component {
@@ -16,7 +16,7 @@ class EpDataList extends React.Component {
 			<Router>
 				<Link to = {name} >
 					<div className='table_div' onClick={() => this.onClickAllEp({ch},{id})}>
-						<table className ='bg-light-green ' width = '700px'>
+						<table className ='asd ' width = '700px'>
 							<tr className = 'trEp'>
 								<td width = '10%'>
 									<img alt='comics' src= {img} width = '70px' height='70px' />

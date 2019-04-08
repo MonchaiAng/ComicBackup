@@ -14,6 +14,7 @@ const Push = ({ data, onRouteChange}) => {
 							id={data[i].id} 
 							ch={data[i].ch}
 							name={data[i].name} 
+							namebook ={data[i].namebook}
 							img={data[i].img}
 							brief={data[i].brief}
 							onRouteChange={onRouteChange}
