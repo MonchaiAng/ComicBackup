@@ -3,8 +3,8 @@ import EpList from '../components/EpList';
 
 
 class TopManga extends React.Component{
-	constructor(){
-		super();
+	constructor(props){
+		super(props);
 		this.state ={
 			comic:[]
 		}
@@ -21,10 +21,11 @@ class TopManga extends React.Component{
 	}
 	render(){
 		const { comic } = this.state;
+		const { onRouteChange } = this.props;
 	return(
 		<div>
 			<h1>Top Manga</h1>
-			<EpList data={comic}/>
+			<EpList data={comic} onRouteChange={onRouteChange}/>
 		</div>
 		);
 	}

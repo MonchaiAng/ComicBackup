@@ -17,7 +17,7 @@ import './App.css';
 // import InfoData from '../components/InfoData';
 // import EpComment from '../components/EpComment';
 // import Push from '../data/Push';
-// import Autosuggest from 'react-autosuggest';
+
 // import Scroll from '../components/Scroll';
 // import SearchBox from '../components/SearchBox';
 // import CardList from '../components/CardList';
@@ -34,45 +34,7 @@ const particlesOptions = {
     }
   }
 }
-const languages = [
-  {
-    name: 'One piece',
-    year: 1972
-  },
-  {
-    name: 'Solo Leveling',
-    year: 2000
-  },
-  {
-    name: 'Dr.Stone',
-    year: 2000
-  },
-];
-function escapeRegexCharacters(str) {
-	return str.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
-}
 
-function getSuggestions(value) {
-  const escapedValue = escapeRegexCharacters(value.trim());
-  
-  if (escapedValue === '') {
-    return [];
-  }
-
-  const regex = new RegExp('^' + escapedValue, 'i');
-
-  return languages.filter(language => regex.test(language.name));
-}
-
-function getSuggestionValue(suggestion) {
-  return suggestion.name;
-}
-
-function renderSuggestion(suggestion) {
-  return (
-    <span>{suggestion.name}</span>
-  );
-}
 class App extends Component{
 	constructor(){
 		super()
@@ -133,24 +95,6 @@ class App extends Component{
 	    	this.setState({idEp:id})
 	    }
     }
-
-	  onChange = (event, { newValue, method }) => {
-	    this.setState({
-	      value: newValue
-	    });
-	  };
-	  
-	  onSuggestionsFetchRequested = ({ value }) => {
-	    this.setState({
-	      suggestions: getSuggestions(value)
-	    });
-	  };
-
-	  onSuggestionsClearRequested = () => {
-	    this.setState({
-	      suggestions: []
-	    });
-	  };
 	render() {		
 		
 		const { isSignedIn, searchfield, data, route, dataEp, idComic, idEp } = this.state;
@@ -177,16 +121,8 @@ class App extends Component{
 		return(
 	      <div>   
 	      	{/*<Navigation/>
-<SearchBox searchChange={this.onSearchChange}/>
+				<SearchBox searchChange={this.onSearchChange}/>
 	      	*/}
-	      	{/*<Autosuggest 
-		        suggestions={suggestions}
-		        onSuggestionsFetchRequested={this.onSuggestionsFetchRequested}
-		        onSuggestionsClearRequested={this.onSuggestionsClearRequested}
-		        getSuggestionValue={getSuggestionValue}
-		        renderSuggestion={renderSuggestion}
-		        inputProps={inputProps} 
-			/>*/}
 	        {
 	        	(
 	             route === 'signin'

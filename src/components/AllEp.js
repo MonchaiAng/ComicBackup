@@ -5,6 +5,7 @@ import EpComment from '../components/EpComment';
 const AllEp = ({data ,dataEp, onRouteChange}) => {	
 	console.log("AllEp")
 	console.log({dataEp})
+	console.log({data})
 	return (
 		<div>
 			<InfoData data = {data}/>

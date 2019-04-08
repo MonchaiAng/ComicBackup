@@ -4,7 +4,7 @@ import BoxEp from '../containers/BoxEp';
 import TopManga from '../containers/TopManga';
 import Push from '../data/Push';
 
-const UpdateHistory = ({data,history, onRouteChange}) => {
+const UpdateHistory = ({data, history, onRouteChange}) => {
 	return (
 		<div>
 			<table>
@@ -15,11 +15,10 @@ const UpdateHistory = ({data,history, onRouteChange}) => {
 						</Update>
 					</td>
 					<td valign='top' width='30opx'>
-						<BoxEp data={history} />
-						<TopManga/>
+						<BoxEp data={history} onRouteChange={onRouteChange}/>
+						<TopManga onRouteChange={onRouteChange}/>
 					</td>
 				</tr>
-
 			</table>
 		</div>
 	);

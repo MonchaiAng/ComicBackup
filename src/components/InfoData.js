@@ -1,4 +1,4 @@
-import React from 'react';
+ import React from 'react';
 import BoxEp from '../containers/BoxEp.css';
 
 const InfoData = ({data}) => {
@@ -8,8 +8,8 @@ const InfoData = ({data}) => {
 						<th width = '330px' height = '385px' className = 'tc' valign="middle">
 							<img alt='comics' src= {data.img} width = '250px' height='350px' />
 						</th>
-						<div width = '300px'>
-							<h1>{data.name}</h1>
+						<div>
+							<h1 className="tl">{data.name}</h1>
 							<td width = '100px' valign="top">
 								<h3>Author(s)</h3>
 								<h3>Artist(s)</h3>

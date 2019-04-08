@@ -1,11 +1,11 @@
 import React from 'react';
 import EpList from '../components/EpList';
 
-const BoxEp =({data}) => {
+const BoxEp =({data, onRouteChange}) => {
 	return(
 		<div>
-			<h1>History</h1>
-			<EpList data={data}/>
+			<h1>History</h1> 
+			<EpList data={data} onRouteChange={onRouteChange}/>
 		</div>
 	);
 }

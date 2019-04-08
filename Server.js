@@ -10,6 +10,59 @@ app.use(bodyParser.json());
 app.use(cors())
 app.use(bodyParser.urlencoded({ extended: true }));
 
+		app.post('/recommend',(req,res)=>{
+			MongoClient.connect(url, (err, db) => { 
+	    		db.collection("epbook", (error, collection) => {
+					collection.find({tag:'Drama',_id:{$in:req.body.history1}}
+					).toArray(function(err, document) {
+						const a = document.length;
+						collection.find({tag:'comedy',_id:{$in:req.body.history1}}).toArray(function(err, document) {
+							const b = document.length;
+							if(a>b){		
+								res.json("Drama")
+							}else{
+								res.json("comedy")
+							}
+							}); 
+				   });
+				});
+			}); 
+		}); 
+		app.post('/getTypeRecommend',(req,res)=>{
+			MongoClient.connect(url, (err, db) => { 
+	    		db.collection("book", (error, collection) => {
+	    			collection.find({'tag':'Drama'}).count()
+	    			.then(data=> {
+	    				let a = Math.floor(Math.random() * Math.floor(data));
+	    				collection.find({tag:req.body.recommend}).skip(a).limit(1).toArray(function(err, document) {
+							res.json(document);
+				   		});
+				    })
+				});
+			}); 
+		}); 
+
+		app.post('/ep',(req,res)=>{
+			MongoClient.connect(url, (err, db) => { 
+    		db.collection("epbook", (error, collection) => {
+					collection.findOne({ch:req.body.ch,id:req.body.id},function(err, document) {
+						// console.log(document)
+						res.json(document)
+					}); 
+			   });
+			});
+		}); 
+
+		app.post('/epother',(req,res)=>{
+			MongoClient.connect(url, (err, db) => { 
+    		db.collection("epbook", (error, collection) => {
+					collection.find({id:req.body.id}).toArray(function(err, document) {
+						// console.log(document)
+						res.json(document)
+					}); 
+			   });
+			});
+		}); 
 
         // collection.insertMany([
         //     {  name: 'Bob', age: 24 },
@@ -68,14 +121,21 @@ app.use(bodyParser.urlencoded({ extended: true }));
 			});
 		}); 
 
-		app.get('/allepbook',(req,res)=>{
+		
+		app.post('/allepbook',(req,res)=>{
 			MongoClient.connect(url, (err, db) => { 
     		db.collection("epbook", (error, collection) => {
-					collection.find()
-						.toArray(function(err, document) {
-						// console.log(document);
-						res.json(document)
-					}); 
+    			console.log(req.body.idComic.id)
+    			console.log(req.body.idComic)
+    			let a = req.body.idComic.id;
+    			if(a==undefined){
+    				a = req.body.idComic;
+    			}
+
+				collection.find({id:a}).toArray(function(err, document) {
+					console.log(document)
+					res.json(document)
+				}); 
 			   });
 			});
 		}); 
@@ -84,7 +144,7 @@ app.use(bodyParser.urlencoded({ extended: true }));
 			MongoClient.connect(url, (err, db) => { 
     		db.collection("user", (error, collection) => {
 					collection.findOne({email:req.body.user},function(err, document) {
-						res.json(document.history[0])
+						res.json(document.history)
 					}); 
 			   });
 			});
@@ -93,8 +153,8 @@ app.use(bodyParser.urlencoded({ extended: true }));
 		app.post('/history2',(req,res)=>{
 			MongoClient.connect(url, (err, db) => { 
     		db.collection("epbook", (error, collection) => {
-					collection.find({_id:req.body.history1}).toArray(function(err, document) {
-						console.log(req.body.history1);
+					collection.find({_id:{$in:req.body.history1}}).toArray(function(err, document) {
+						// console.log(document)
 						res.json(document)
 					}); 
 			   });
@@ -106,7 +166,7 @@ app.use(bodyParser.urlencoded({ extended: true }));
     		db.collection("user", (error, collection) => {
 					collection.update(
 						{ "email": req.body.user},
-			            {$set:{ history:req.body.storehistory }},
+			            {$push:{ history:req.body.storehistory }},
 			        ); 
 			   });
 			});
@@ -116,12 +176,13 @@ app.use(bodyParser.urlencoded({ extended: true }));
 			MongoClient.connect(url, (err, db) => { 
     		db.collection("book", (error, collection) => {
 					collection.find().sort({view:-1}).limit(3).toArray(function(err, document) {
-						// console.log(document);
 						res.json(document) 
 					}); 
 			   });
 			});
 		});
+
+		
 
 			// database.users.push({
 			// 	id: '125',

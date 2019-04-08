@@ -11,9 +11,6 @@ class EpDataList extends React.Component {
   	}
 	render(){
 		const {id, ch, img, date ,name, onRouteChange} = this.props;
-		console.log("gggggggggggggg")
-		console.log({id})
-		console.log({ch})
 		return(	
 			<div>
 			<Router>
