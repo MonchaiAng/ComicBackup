@@ -16,8 +16,11 @@ class Search2 extends Component{
 			<div>
 			{
 				value == name || value == author?
-				(
+				(	
+					<div>
+					<br/>
 					<button type="button" onClick={() => this.onClickAllEp({_id})}>Submit</button>
+					</div>	
 					// <h1 onClick={() => this.onClickAllEp({_id})}>{name}</h1>
 				):
 					<p></p>

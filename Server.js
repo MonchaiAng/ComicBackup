@@ -96,6 +96,30 @@ app.use(bodyParser.urlencoded({ extended: true }));
 			    })
 	    	});
 		}); 
+
+		app.post('/addcomment',(req,res) => {
+			MongoClient.connect(url, (err, db) => { 
+		    	db.collection("comment", (error, collection) => {
+					collection.insert([
+			            {  comic:req.body.comic, email: req.body.email,comment: req.body.comment, date: new Date() },
+			        ], (error, result) => { 
+			            db.close();
+			        });
+			    })
+	    	});
+		}); 
+
+		app.post('/showcomment',(req,res) => {
+			MongoClient.connect(url, (err, db) => { 
+		    	db.collection("comment", (error, collection) => {
+					collection.find({comic:req.body.comic}).sort({date:1}).toArray(function(err, document) {
+						console.log("waitttt")
+						console.log(document)
+						res.json(document)
+			        });
+			    })
+	    	});
+		}); 
  
 		app.get('/book',(req,res)=>{
 			MongoClient.connect(url, (err, db) => { 
@@ -114,7 +138,6 @@ app.use(bodyParser.urlencoded({ extended: true }));
     		db.collection("book", (error, collection) => {
 					collection.find().sort({name:1})
 						.toArray(function(err, document) {
-						console.log(document);
 						res.json(document)
 					}); 
 			   });

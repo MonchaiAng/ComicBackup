@@ -4,7 +4,7 @@ import BoxEp from '../containers/BoxEp';
 import TopManga from '../containers/TopManga';
 import Push from '../data/Push';
 
-const UpdateHistory = ({data, history, onRouteChange}) => {
+const UpdateHistory = ({data, history, onRouteChange, user}) => {
 	return (
 		<div>
 			<table>

@@ -3,7 +3,7 @@ import Slideshow from './Slideshow';
 import UpdateHistory from './UpdateHistory';
 import AllEp from '../components/AllEp';
 import DropListEpisodes from '../components/dropListEpisodes';
-import Hot from './Hot';
+import Update from './Update';
 import EpList from '../components/EpList';
 import { BrowserRouter as Router, Route, Link } from "react-router-dom";
 import Sort from './Sort';
@@ -181,23 +181,22 @@ getTypeRecommend (){
 						route === 'home'?
 						(
 							<div>
-								{/*<h1>{user}</h1>*/}
 								<h1 className ='tc'>Recommended Manga</h1>
-								<Hot>
+								<Update>
 									<Slideshow style={{width: '1000px'}} history={filteredData3}/>
-								</Hot>
+								</Update>
 								<UpdateHistory data = {filteredData} history={filteredData2} onRouteChange={this.onRouteChange}/>
 							</div>
 						):route === 'allep'?
 						(
 							<div>
-								<AllEp data={comic[idComic.id]} dataEp={allepcomic} onRouteChange={this.onRouteChange}/>
+								<AllEp data={comic[idComic.id]} dataEp={allepcomic} onRouteChange={this.onRouteChange} user ={user}/>
 							</div>
 						):route === 'ep'?
 						(
 							<DropListEpisodes data={comic} id={idComic.id} ep={idEp.ch} onRouteChange={this.onRouteChange}/>
 						):
-							<h1>555555</h1>
+							<h1>else</h1>
 					}
 				</div>
 		);

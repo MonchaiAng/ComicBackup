@@ -118,11 +118,11 @@ class App extends Component{
 		  // location is an object like window.location
 		  console.log(action, location.pathname, location.state);
 		});
+		{/*<Navigation/>
+				<SearchBox searchChange={this.onSearchChange}/>
+	     */}
 		return(
 	      <div>   
-	      	{/*<Navigation/>
-				<SearchBox searchChange={this.onSearchChange}/>
-	      	*/}
 	        {
 	        	(
 	             route === 'signin'
@@ -130,7 +130,6 @@ class App extends Component{
              	      <Particles className='particles'
 			             params={particlesOptions}
 		               />
-	             		{/*<Navigation2 isSignedIn={isSignedIn} onRouteChange={this.onRouteChange}/>*/}
 	             		<Signin isSignedIn={isSignedIn} loadUser={this.loadUser} onRouteChange={this.onRouteChange}/>
 	             	</div>
 	             : 
