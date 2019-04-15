@@ -1,6 +1,6 @@
 import React from 'react';
-import Navigation2 from '../components/Navigation2';
-import Navigation from '../components/Navigation';
+import Navigation2 from '../components/navigation/Navigation2';
+import Navigation from '../components/navigation/Navigation';
 class Signin extends React.Component {
   constructor(props) {
     super(props);

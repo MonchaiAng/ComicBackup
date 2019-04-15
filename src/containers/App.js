@@ -1,12 +1,12 @@
 import React, { Component } from 'react';
 import Particles from 'react-particles-js';
-import Navigation from '../components/Navigation';
-import Navigation2 from '../components/Navigation2';
+import Navigation from '../components/navigation/Navigation';
+import Navigation2 from '../components/navigation/Navigation2';
 import Signin from '../Signin/Signin';
 import Register from '../Register/Register';
-import Slideshow from '../components/Slideshow';
+import Slideshow from '../components/slideshow/Slideshow';
 import UpdateHistory from '../components/UpdateHistory';
-import DropListEpisodes from '../components/dropListEpisodes';
+import DropListEpisodes from '../components/dropdown/dropListEpisodes';
 import AllEp from '../components/AllEp';
 import Home from '../components/Home';
 import { createBrowserHistory } from 'history';

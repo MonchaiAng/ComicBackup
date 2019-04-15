@@ -2,8 +2,6 @@ import React from 'react';
 import ShowComment2 from './ShowComment2';
 
 const ShowComment = ({ data }) => {
-	console.log("1111111111111111")
-	console.log({data})
 	return (
 		<div>
 			{

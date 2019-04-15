@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import EpList from '../components/EpList';
+import EpList from '../components/ep/EpList';
 
 
 class TopManga extends React.Component{

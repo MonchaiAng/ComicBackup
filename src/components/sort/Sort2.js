@@ -1,10 +1,10 @@
 import React from 'react';
 import Sort3 from './Sort3';
 
-const Sort2 = ({ data }) => {
+const Sort2 = ({ data, onRouteChange }) => {
 	return (
 		<div>
-			<br/><br/>
+			<br/><br/><br/>
 			<h1>Sort</h1>
 			{
 				data.map((user, i) =>{
@@ -16,7 +16,7 @@ const Sort2 = ({ data }) => {
 							name={data[i].name} 
 							img={data[i].img}
 							brief={data[i].brief}
-							// onRouteChange={onRouteChange}
+							onRouteChange={onRouteChange}
 						/>
 					);
 				})

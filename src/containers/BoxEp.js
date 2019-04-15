@@ -1,5 +1,5 @@
 import React from 'react';
-import EpList from '../components/EpList';
+import EpList from '../components/ep/EpList';
 
 const BoxEp =({data, onRouteChange}) => {
 	return(

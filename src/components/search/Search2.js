@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import './Search.css';
 
 class Search2 extends Component{
 	constructor(props){	
@@ -12,14 +13,17 @@ class Search2 extends Component{
   	}
 	render(){
 		const {_id, name, value, author} = this.props;
+		console.log({value})
 		return (
 			<div>
 			{
 				value == name || value == author?
 				(	
 					<div>
-					<br/>
-					<button type="button" onClick={() => this.onClickAllEp({_id})}>Submit</button>
+						<br/>
+						<button type="Submit" onClick={() => this.onClickAllEp({_id})}>
+							Search
+         				</button>
 					</div>	
 					// <h1 onClick={() => this.onClickAllEp({_id})}>{name}</h1>
 				):

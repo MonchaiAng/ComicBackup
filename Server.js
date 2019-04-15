@@ -9,7 +9,61 @@ var url = 'mongodb://localhost:27017/comic';
 app.use(bodyParser.json());
 app.use(cors())
 app.use(bodyParser.urlencoded({ extended: true }));
+		
+		//addhistory start test
+		app.post('/setep',(req,res)=>{
+			MongoClient.connect(url, (err, db) => { 
+    		db.collection("epbook", (error, collection) => {
+					collection.find({ _id: req.body.idSpecific }).toArray(function(err, document) { 
+						res.json(document)
+			            db.close();
+			        });
+			   });
+			});
+		}); 
 
+		app.post('/addhistory',(req,res)=>{
+			MongoClient.connect(url, (err, db) => { 
+    		db.collection("history", (error, collection) => {
+					collection.insert([
+			            { email: req.body.email, idEp: req.body.idSpecific, test:req.body.test,date: new Date() },
+			        ], (error, result) => { 
+			            db.close();
+			        });
+			   });
+			});
+		}); 
+
+		app.post('/gethistory',(req,res)=>{
+			MongoClient.connect(url, (err, db) => { 
+    		db.collection("history", (error, collection) => {
+					collection.find({ email: req.body.email }).sort({date:-1}).limit(3).toArray(function(err, document) { 
+						let arrayhistory = []
+						for(let i=document.length-1;i>=0;i--){
+							arrayhistory.push(document[i].test[0])
+						}
+						res.json(arrayhistory)
+			            db.close();
+			        });
+			   });
+			});
+		}); 
+
+		app.post('/getnumberhistory',(req,res)=>{
+			MongoClient.connect(url, (err, db) => { 
+    		db.collection("history", (error, collection) => {
+					collection.find({ email: req.body.email }).toArray(function(err, document) { 
+						let arrayhistory = []
+						for(let i=document.length-1;i>=0;i--){
+							arrayhistory.push(document[i].idEp)
+						}
+						res.json(arrayhistory)
+			            db.close();
+			        });
+			   });
+			});
+		}); 
+		//end test
 		app.post('/recommend',(req,res)=>{
 			MongoClient.connect(url, (err, db) => { 
 	    		db.collection("epbook", (error, collection) => {
@@ -18,11 +72,16 @@ app.use(bodyParser.urlencoded({ extended: true }));
 						const a = document.length;
 						collection.find({tag:'comedy',_id:{$in:req.body.history1}}).toArray(function(err, document) {
 							const b = document.length;
-							if(a>b){		
-								res.json("Drama")
-							}else{
-								res.json("comedy")
-							}
+							console.log(a)
+							console.log(b)
+								if(a>b){	
+
+									console.log("drama")
+									res.json("Drama")
+								}else{
+									console.log("comedy")
+									res.json("comedy")
+								}
 							}); 
 				   });
 				});
@@ -52,6 +111,76 @@ app.use(bodyParser.urlencoded({ extended: true }));
 			   });
 			});
 		}); 
+
+		app.post('/favorites',(req,res)=>{
+			MongoClient.connect(url, (err, db) => { 
+    		db.collection("favorites", (error, collection) => {
+					collection.findOne({comic:req.body.comic,email:req.body.user},function(err, document) {
+						if(document==null){
+							res.json(0)
+						}else{
+							res.json(1)
+						}
+					}); 
+			   });
+			});
+		}); 
+
+		app.post('/addfavorite',(req,res) => {
+			MongoClient.connect(url, (err, db) => { 
+		    	db.collection("favorites", (error, collection) => {
+					collection.insert([
+			            { email: req.body.email, comic: req.body.comic },
+			        ], (error, result) => { 
+			            db.close();
+			        });
+			    })
+	    	});
+		});
+
+		app.post('/findFavorites',(req,res) => {
+			MongoClient.connect(url, (err, db) => { 
+		    	db.collection("favorites", (error, collection) => {
+					collection.find({email:req.body.email}).toArray(function(err, document) {
+						if(document==""){
+							res.json(0)
+						}else{
+							let arrayFavorites = [];
+							for(let i =0;i<document.length;i++){
+								arrayFavorites.push(document[i].comic)
+							}
+							res.json(arrayFavorites) 
+						}
+					}); 
+			    })
+	    	});
+		});
+
+		app.post('/findFavoritesUpdate',(req,res) => {
+			MongoClient.connect(url, (err, db) => { 
+		    	db.collection("epbook", (error, collection) => {
+		    		// console.log(req.body.favoritesComic)
+					collection.find({id:{$in:req.body.favoritesComic},
+										created:{$gte:new Date(new Date().setHours(00,00,00)),
+										$lt: new Date(new Date().setHours(23,59,59))}
+									}).toArray(function(err, document) {
+						res.json(document)
+					}); 
+			    })
+	    	});
+		});
+
+		app.post('/removefavorite',(req,res) => {
+			MongoClient.connect(url, (err, db) => { 
+		    	db.collection("favorites", (error, collection) => {
+					collection.remove(
+			            { email: req.body.email, comic: req.body.comic },
+			         (error, result) => { 
+			            db.close();
+			        });
+			    })
+	    	});
+		});
 
 		app.post('/epother',(req,res)=>{
 			MongoClient.connect(url, (err, db) => { 
@@ -113,8 +242,6 @@ app.use(bodyParser.urlencoded({ extended: true }));
 			MongoClient.connect(url, (err, db) => { 
 		    	db.collection("comment", (error, collection) => {
 					collection.find({comic:req.body.comic}).sort({date:1}).toArray(function(err, document) {
-						console.log("waitttt")
-						console.log(document)
 						res.json(document)
 			        });
 			    })

@@ -1,7 +1,56 @@
- import React from 'react';
+import React, { Component } from 'react';
 import BoxEp from '../containers/BoxEp.css';
 
-const InfoData = ({data}) => {
+class InfoData extends Component{
+	constructor(props){	
+		super(props)
+		this.state={
+			added:0
+		}
+	}
+	componentWillMount() {
+		console.log("InfoData")
+		console.log(this.props.data)
+		fetch('http://localhost:3000/favorites', {
+	      method: 'post',
+	      headers: {'Content-Type': 'application/json'},
+	       body: JSON.stringify({
+	       	comic: this.props.data._id,
+	       	user: this.props.user
+	      })
+	    })
+	    .then(response => response.json())
+	    .then(data => {
+	      this.setState({added:data})
+	    })
+	}
+	onAdd = () =>{
+		fetch('http://localhost:3000/addfavorite', {
+	      method: 'post',
+	      headers: {'Content-Type': 'application/json'},
+	       body: JSON.stringify({
+	       	comic: this.props.data._id,
+	       	email:this.props.user
+	      })
+	    })
+	    this.setState({added:1})
+	}
+
+	onRemove = () =>{
+		fetch('http://localhost:3000/removefavorite', {
+	      method: 'post',
+	      headers: {'Content-Type': 'application/json'},
+	       body: JSON.stringify({
+	       	comic: this.props.data._id,
+	       	email:this.props.user
+	      })
+	    })
+	    this.setState({added:0})
+	}
+
+		render(){
+		const { data,user } = this.props; 
+		const { added } = this.state;
 		return (
 			<div>
 					<tr>
@@ -26,7 +75,13 @@ const InfoData = ({data}) => {
 							</td>
 						</div>
 							<td className = 'tr'width = '600px'>
-								{/*<button className = 'pa2'type= 'button'> Add to Favourite</button>*/}
+							{
+								added == 0?
+								(
+									<button className = 'pa2'type= 'button' onClick={this.onAdd}> Add to Favourite</button>
+								):
+									<button className = 'pa2'type= 'button' onClick={this.onRemove}> Un Favourite</button>
+							}
 							</td>
 					</tr>
 					<div >
@@ -42,6 +97,7 @@ const InfoData = ({data}) => {
 		
 			</div>	
 	);
+	}
 };
 
 export default InfoData;

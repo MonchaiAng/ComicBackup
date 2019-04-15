@@ -1,5 +1,5 @@
 import React from 'react';
-import '../containers/BoxEp.css';
+import '../../containers/BoxEp.css';
 
 
 class Ep extends React.Component {

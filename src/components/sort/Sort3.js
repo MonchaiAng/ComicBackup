@@ -1,25 +1,20 @@
 import React from 'react';
-import './Card.css';
-import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
-import Sort from '../components/sort/Sort';
-import AllEp from "./AllEp";
 
-class Card extends React.Component {
+class Sort3 extends React.Component {
 	constructor(props) {
 		super(props);
   	}
-  	onClickAllEp({ch},{id},{_id}){
-  		this.props.onRouteChange('ep',{ch},{id},{_id});
+  	onClickAllEp({_id}){
+  		this.props.onRouteChange('allep',0,_id);
   	}
   	render(){
-  		const { _id,id ,name ,img ,brief, ch, namebook } = this.props;
+  		const { _id, name ,img ,brief } = this.props;
 		return(		//decorate
 			<div className ='tc asd dib br3 pa2 ma2 grow bw2 shadow-5 container' style = {{ width:'200px', height:'280px'}}>	
 				<img alt='comics' src= {img} width = '185px' height='265px' />
-				<p>{namebook}</p>
-				<p>Ch.{ch}</p>
+				<p>{name}</p>
 					<div>
-						<div onClick={() => this.onClickAllEp({ch},{id},{_id})}>
+						<div onClick={() => this.onClickAllEp({_id})}>
 							<div className="overlay">					
 							    <div className="text">
 							    	 Short {name} 	
@@ -31,4 +26,4 @@ class Card extends React.Component {
 		);
 	}
 }
-export default Card;
+export default Sort3;

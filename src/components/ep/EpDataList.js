@@ -1,5 +1,5 @@
 import React from 'react';
-import '../components/slideshow/Slideshow.css';
+import '../slideshow/Slideshow.css';
 import { BrowserRouter as Router, Route, Link } from "react-router-dom";
 
 class EpDataList extends React.Component {

@@ -1,10 +1,10 @@
 import React, { Component } from 'react';
 import { BrowserRouter as Router, Route, Link } from "react-router-dom";
-import Home from "./Home";
-import Sort from "../components/sort/Sort";
-import Alert from "../components/alert/Alert";
-import AllEp from "./AllEp";
-import Profile from '../components/Profile';
+import Home from "../Home";
+import Sort from "../sort/Sort";
+import Alert from "../alert/Alert";
+import AllEp from "../AllEp";
+import Profile from '../Profile';
 import './Navigation.css';
 
 import Autosuggest from 'react-autosuggest';
@@ -136,8 +136,8 @@ class Navigation extends Component{
 						/>
 				      	<Route exact={true} path="/" render={(props) => <Home {...props} user={comic} value={value}/>}/>
 				      	{/*<Route exact={true} component={Home}/>*/}
-				      	<Route path="/sort" render={(props) => <Sort {...props} user={comic} value={value}/>}/>
-				      	<Route path="/alert" render={(props) => <Alert {...props} user={comic} value={value}/>}/>
+				      	<Route path="/sort" render={(props) => <Sort {...props} user={comic}/>}/>
+				      	<Route path="/alert" render={(props) => <Alert {...props} user={comic}/>}/>
 				    </div>
 				</Router>
 			</div>

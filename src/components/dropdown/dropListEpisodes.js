@@ -1,6 +1,6 @@
 import React from 'react';
 import './dropListEpisodes.css';
-import Page from './Page';
+import Page from '../Page';
 import DropEp from './DropEp';
 import DropComic from './DropComic';
 // import logo from '../img/0_1_1.svg';	

@@ -1,14 +1,13 @@
 import React, { Component } from 'react';
-import Slideshow from './Slideshow';
+import Slideshow from '../components/slideshow/Slideshow';
 import UpdateHistory from './UpdateHistory';
 import AllEp from '../components/AllEp';
-import DropListEpisodes from '../components/dropListEpisodes';
+import DropListEpisodes from '../components/dropdown/dropListEpisodes';
 import Update from './Update';
-import EpList from '../components/EpList';
+import EpList from '../components/ep/EpList';
 import { BrowserRouter as Router, Route, Link } from "react-router-dom";
-import Sort from './Sort';
-import List from './List';
-import Search from './Search';
+import Sort from '../components/sort/Sort';
+import Search from './search/Search';
 
 class Home extends Component{
 	constructor(props){	
@@ -32,13 +31,12 @@ class Home extends Component{
       		idComic:0,
       		idEp:0,
 			items: [],
-			user: {
-		       	id: '',
-		        name: '',
-				email: '',
-		        entries: 0,
-		        joined: ''
-		      },
+
+			testhistory:[],
+			teststorehistory:{},
+			testnumberhistory:[]
+
+
 	}
 }
 
@@ -68,6 +66,22 @@ onRouteChange = (route,id,id_comic,_id) => {
 	    this.setState({idEp:id});
 	    this.setState({idComic:id_comic})
 
+	    if(typeof(_id) !== 'undefined'){
+		    fetch('http://localhost:3000/setep', {
+		      method: 'post',
+		      headers: {'Content-Type': 'application/json'},
+		       body: JSON.stringify({
+			        idSpecific: _id._id
+		      })
+		    })
+		    .then(response => response.json())
+		    .then(data => {
+		    	this.setState({teststorehistory:data})
+		    	this.addhistory(_id)
+		    })
+	    }
+	    
+
 	    // let a = {_id}._id._id;
 	    // fetch('http://localhost:3000/storehistory', {
 	    //   method: 'post',
@@ -78,6 +92,17 @@ onRouteChange = (route,id,id_comic,_id) => {
 	    //   })
 	    // })
 	}
+}
+addhistory(_id){
+	fetch('http://localhost:3000/addhistory', {
+	      method: 'post',
+	      headers: {'Content-Type': 'application/json'},
+	       body: JSON.stringify({
+		       	email: this.props.user,
+		        idSpecific: _id._id,
+		        test:this.state.teststorehistory
+	      })
+	})
 }
 componentWillMount() {
 	 fetch('http://localhost:3000/book', {
@@ -98,40 +123,42 @@ componentWillMount() {
       this.setState({epcomic:data})
     })
 
-
-    fetch('http://localhost:3000/history', {		//post history from user
-      method: 'post',
-      headers: {'Content-Type': 'application/json'},
-      body: JSON.stringify({
-        user: this.props.user
-      })
-    })
-    .then(response => response.json())
-    .then(data => {
-      this.setState({history:data})
-      this.waithistory();
-      this.recommend();
-    })
-}
-waithistory(){
-	fetch('http://localhost:3000/history2', {		//find ep from history
+    //test
+    fetch('http://localhost:3000/gethistory', {
       method: 'post',
       headers: {'Content-Type': 'application/json'},
        body: JSON.stringify({
-        history1: this.state.history
+	       	email: this.props.user,
       })
-    })
-    .then(response => response.json())
+	})
+	.then(response => response.json())
     .then(data => {
-      this.setState({history2:data})
+      this.setState({testhistory:data})
     })
+
+    fetch('http://localhost:3000/getnumberhistory', {
+      method: 'post',
+      headers: {'Content-Type': 'application/json'},
+       body: JSON.stringify({
+	       	email: this.props.user,
+      })
+	})
+	.then(response => response.json())
+    .then(data => {
+      this.setState({testnumberhistory:data})
+      console.log("testnumberhistory")
+      console.log(this.state.testnumberhistory)
+      this.recommend();
+    })
+
+    //end test
 }
 recommend (){
 	fetch('http://localhost:3000/recommend', {		//find ep from history
       method: 'post',
       headers: {'Content-Type': 'application/json'},
        body: JSON.stringify({
-        history1: this.state.history
+        history1: this.state.testnumberhistory
       })
     })
     .then(response => response.json())
@@ -150,29 +177,26 @@ getTypeRecommend (){
     })
     .then(response => response.json())
     .then(data => {
+    	console.log("get type recommend")
+    	console.log(data)
       this.setState({history3:data})
     })
 }
 
 	render(){
 		const { isSignedIn, searchfield, data, route, dataEp, idComic, idEp, 
-			comic, epcomic, allepcomic, history, history2, history3 } = this.state;
+			comic, epcomic, allepcomic, history, history3, testhistory } = this.state;
 		const { user } = this.props;
 		const filteredData = epcomic.filter(detail =>{ // follow date
-			return detail.name.toLowerCase().includes(searchfield.toLowerCase());
-		})
-
-		const filteredData2 = history2.filter(detail =>{ // follow date
 			return detail.name.toLowerCase().includes(searchfield.toLowerCase());
 		})
 
 		const filteredData3 = history3.filter(detail =>{ // follow date
 			return detail.name.toLowerCase().includes(searchfield.toLowerCase());
 		})
-		{/*<AllEp data={data[idComic.id]} dataEp={dataEp[idComic.id]} onRouteChange={this.onRouteChange}/>
-						*/}
-
-		
+		console.log("home")
+		console.log(this.props.user)
+		console.log(this.props.value)
 		return(
 				<div>
 					<br/><br/>
@@ -185,7 +209,7 @@ getTypeRecommend (){
 								<Update>
 									<Slideshow style={{width: '1000px'}} history={filteredData3}/>
 								</Update>
-								<UpdateHistory data = {filteredData} history={filteredData2} onRouteChange={this.onRouteChange}/>
+								<UpdateHistory data = {filteredData} history={testhistory} onRouteChange={this.onRouteChange}/>
 							</div>
 						):route === 'allep'?
 						(
