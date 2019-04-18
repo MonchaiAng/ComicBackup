@@ -49,7 +49,7 @@ class Sort extends Component{
 		    })
 		    .then(response => response.json())
 		    .then(data => {
-		    	console.log(data)
+		    	// console.log(data)
 		      this.setState({allepcomic:data})
 		    })
 
@@ -88,37 +88,42 @@ class Sort extends Component{
 	      this.setState({comic:data})
 	    })
 	}
+	componentWillReceiveProps(nextProps,nextState) {
+		this.setState({route: 'sort'});
+	}
 	render(){
 		const { comic, route, idComic, allepcomic, idEp, sortcomic } = this.state;
 		const { user, value } = this.props;
-		console.log("sort")
-		console.log(this.props.user)
-		console.log(this.props.value)
+		// console.log("sort")
+		// console.log(this.props.user)
+		// console.log(this.props.value)
 		return(
-			<div className="tc">
-			<Search data={comic} value={this.props.value} onRouteChange={this.onRouteChange}/>
-				{	
-					route === 'sort'?
-					(
-						<Update>
-							<Sort2 data={sortcomic} onRouteChange={this.onRouteChange}/> 
-						</Update>
-					):route === 'allep'?
-					(
-						<div>
-							<br/><br/><br/>
-							<AllEp idComic ={idComic} data={comic[idComic]} dataEp={allepcomic} onRouteChange={this.onRouteChange} user ={user}/>
-						</div>
-					):route === 'ep'?
-					(
-						<div>
-							<br/><br/>	
-							<DropListEpisodes data={comic} id={idComic.id} ep={idEp.ch} onRouteChange={this.onRouteChange}/>
-						</div>
-					):
-						<h1>else</h1>
-				}
-			</div>
+			
+				<div className="tc">
+				{/*<br/><br/>
+				<Search data={comic} value={this.props.value} onRouteChange={this.onRouteChange}/>*/}
+					{	
+						route === 'sort'?
+						(
+							<Update>
+								<Sort2 data={sortcomic} onRouteChange={this.onRouteChange}/> 
+							</Update>
+						):route === 'allep'?
+						(
+							<div>
+								<br/><br/><br/>
+								<AllEp idComic ={idComic} data={comic[idComic]} dataEp={allepcomic} onRouteChange={this.onRouteChange} user ={user}/>
+							</div>
+						):route === 'ep'?
+						(
+							<div>
+								<br/><br/>	
+								<DropListEpisodes data={comic} id={idComic.id} ep={idEp.ch} onRouteChange={this.onRouteChange}/>
+							</div>
+						):
+							<h1>else</h1>
+					}
+				</div>
 		);
 	
 	}

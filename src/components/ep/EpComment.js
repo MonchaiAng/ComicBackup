@@ -5,14 +5,16 @@ import Comment from '../Comment';
 const EpComment = ({data, dataEp, onRouteChange, email}) => {
 		return (
 			<div>
-				<tr>
-					<td>
-						<Epdata data = {data} dataEp = {dataEp} onRouteChange={onRouteChange}/>
-					</td>
-					<td>
-						<Comment data={data} email={email} onRouteChange={onRouteChange}/>
-					</td>
-				</tr>
+				<tbody>
+					<tr>
+						<td>
+							<Epdata data = {data} dataEp = {dataEp} onRouteChange={onRouteChange}/>
+						</td>
+						<td>
+							<Comment data={data} email={email} onRouteChange={onRouteChange}/>
+						</td>
+					</tr>
+				</tbody>
 			</div>
 	);
 };

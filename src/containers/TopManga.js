@@ -1,5 +1,5 @@
-import React, { Component } from 'react';
-import EpList from '../components/ep/EpList';
+import React from 'react';
+import EpListTop from '../components/ep/EpListTop';
 
 
 class TopManga extends React.Component{
@@ -25,7 +25,7 @@ class TopManga extends React.Component{
 	return(
 		<div>
 			<h1>Top Manga</h1>
-			<EpList data={comic} onRouteChange={onRouteChange}/>
+			<EpListTop data={comic} onRouteChange={onRouteChange}/>
 		</div>
 		);
 	}

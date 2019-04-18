@@ -10,26 +10,28 @@ class EpDataList extends React.Component {
   		this.props.onRouteChange('ep',{ch},{id});
   	}
 	render(){
-		const {id, ch, img, date ,name, onRouteChange} = this.props;
+		const {id, ch, img, date ,name} = this.props;
 		return(	
 			<div>
 				<Router>
 					<Link to = {name} >
 						<div className='table_div' onClick={() => this.onClickAllEp({ch},{id})}>
 							<table className ='asd ' width = '700px'>
-								<tr className = 'trEp'>
-									<td width = '10%'>
-										<img alt='comics' src= {img} width = '70px' height='70px' />
-									</td>
-									<td width = '35%'>
-										<p className = 'tl'>Episodes{ch}: {name}</p>
-									</td>
-									<td width = '30%'>
-										<p className = 'tr'>{date}</p>
-									</td>
-									<td width = '5%'>
-									</td>
-								</tr>
+								<tbody>
+									<tr className = 'trEp'>
+										<td width = '10%'>
+											<img alt='comics' src= {img} width = '70px' height='70px' />
+										</td>
+										<td width = '35%'>
+											<p className = 'tl'>Episodes{ch}: {name}</p>
+										</td>
+										<td width = '30%'>
+											<p className = 'tr'>{date}</p>
+										</td>
+										<td width = '5%'>
+										</td>
+									</tr>
+								</tbody>
 							</table>
 						</div>
 					</Link>

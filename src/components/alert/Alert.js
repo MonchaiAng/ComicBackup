@@ -72,7 +72,7 @@ class Alert extends Component{
 	    })
 	    .then(response => response.json())
 	    .then(data => {
-	    	if(data == 0){
+	    	if(data === 0){
 	    		console.log(data)
 	    		this.setState({haveAlert:0})
 	    	}else{
@@ -105,6 +105,9 @@ class Alert extends Component{
 	    	this.setState({haveAlert:1})
 	    })
 	}
+	componentWillReceiveProps(nextProps,nextState) {
+		this.setState({route: 'sort'});
+	}
 	render(){
 		const { user } = this.props;
 		const { comicFavorites, haveAlert, EpAlert,comic, route, idComic, allepcomic, idEp, sortcomic, sort  } = this.state;
@@ -116,18 +119,18 @@ class Alert extends Component{
 			<div className ="tc">
 			<br/><br/>
 			{
-					haveAlert == 1 && route == 'sort'?
+					haveAlert === 1 && route === 'sort'?
 					(
 						<Update>
 							<Alert1 data={EpAlert} onRouteChange={this.onRouteChange}/> 
 						</Update>
-					):haveAlert == 1 && route == 'allep'?
+					):haveAlert === 1 && route === 'allep'?
 					(
 						<div>
 							<br/><br/><br/>
 							<AllEp data={comic[idComic.id]} dataEp={allepcomic} onRouteChange={this.onRouteChange} user ={user}/>
 						</div>
-					):haveAlert == 1 && route == 'ep'?
+					):haveAlert === 1 && route === 'ep'?
 					(
 						<DropListEpisodes data={comic} id={idComic.id} ep={idEp.ch} onRouteChange={this.onRouteChange}/>
 					):

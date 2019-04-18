@@ -1,8 +1,8 @@
 import React from 'react';
 import '../Card.css';
-import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
+// import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
 // import Sort from '../Sort';
-import AllEp from "../AllEp";
+// import AllEp from "../AllEp";
 
 class Alert2 extends React.Component {
 	constructor(props) {

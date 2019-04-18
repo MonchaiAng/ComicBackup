@@ -7,42 +7,40 @@ class DropComic extends React.Component {
 		super(props)
   	}
   	render(){
-  		const { id, ep, data, nameep, onRouteChange } = this.props;
+  		const { id, ep, namebook, nameEpisode, data, nameep, onRouteChange, names} = this.props;
 		return (
 			<div>
-				<ul class="tl dropdown">
-					<li class="dropbtn">Solo Leveling</li>
-						<li class="dropdown-content">
+				<ul className="tl dropdown">
+					<li className="dropbtn">{namebook}</li>
+						<li className="dropdown-content">
 				{
 					data.map((user, i) =>{
 						return (
-							<div>
-								<DropComic2
-									key ={i}
-									_id={data[i]._id}
-									name={data[i].name}
-									onRouteChange={onRouteChange}
-								/>
-							</div>
+							<DropComic2
+								key ={i}
+								_id={data[i]._id}
+								name={data[i].name}
+								onRouteChange={onRouteChange}
+							/>
 						);
 					})
 				}
 					</li>
 				</ul>
-				<ul class=" ep tl dropdown">
-					<li class="dropbtn">Ep.1:I Got into Trouble as Soon as I Arrived </li>
-						<li class="dropdown-content">
+				<ul className=" ep tl dropdown">
+					<li className="dropbtn">Ep.{ep}:{nameEpisode} </li>
+						<li className="dropdown-content">
 				{
 					nameep.map((user, i) =>{
 						return (
-							<div>
-								<DropEp2
-									key ={i}
-									count={1}
-									name={nameep[i].name}
-									onRouteChange={onRouteChange}
-								/>
-							</div>
+							<DropEp2
+								key ={i}
+								count={i+1}
+								id = {nameep[i].id}
+								ch = {nameep[i].ch}
+								name={nameep[i].name}
+								onRouteChange={onRouteChange}
+							/>
 						);
 					})
 				}

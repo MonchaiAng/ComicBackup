@@ -4,14 +4,18 @@ class DropComic2 extends React.Component {
 	constructor(props) {
 		super(props)
   	}
-  	onClickSelectComic({_id}){
-  		this.props.onRouteChange('ep',1,{_id});
+  	onClickSelectComic({_id, name}){
+  		let ch = 1
+  		let id = _id
+  		this.props.onRouteChange('ep',{ch},{id});
+  		// console.log("onClicks")
+  		// console.log(name)
   	}
 
   	render(){
-  		const { _id, key, name } = this.props;
+  		const { _id, name } = this.props;
 		return(
-			<div onClick={() => this.onClickSelectComic({_id})}>
+			<div onClick={() => this.onClickSelectComic({_id, name})}>
 				<a>{name}</a>
 			</div>
 		);

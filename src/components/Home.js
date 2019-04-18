@@ -34,7 +34,8 @@ class Home extends Component{
 
 			testhistory:[],
 			teststorehistory:{},
-			testnumberhistory:[]
+			testnumberhistory:[],
+			storeNohistory:[]
 
 
 	}
@@ -49,6 +50,8 @@ onRouteChange = (route,id,id_comic,_id) => {
     	this.setState({route: route});
     	this.setState({idComic:id_comic})
     	this.setState({idEp:id})
+    	console.log("allep")
+    	console.log(id_comic)
 	    fetch('http://localhost:3000/allepbook', {
 	      method: 'post',
 	      headers: {'Content-Type': 'application/json'},
@@ -65,24 +68,24 @@ onRouteChange = (route,id,id_comic,_id) => {
     	this.setState({route: route});
 	    this.setState({idEp:id});
 	    this.setState({idComic:id_comic})
-
-	    if(typeof(_id) !== 'undefined'){
-		    fetch('http://localhost:3000/setep', {
-		      method: 'post',
-		      headers: {'Content-Type': 'application/json'},
-		       body: JSON.stringify({
-			        idSpecific: _id._id
-		      })
-		    })
-		    .then(response => response.json())
-		    .then(data => {
-		    	this.setState({teststorehistory:data})
-		    	this.addhistory(_id)
-		    })
-	    }
+	    // if(typeof(_id) !== 'undefined'){
+		   //  fetch('http://localhost:3000/setep', {
+		   //    method: 'post',
+		   //    headers: {'Content-Type': 'application/json'},
+		   //     body: JSON.stringify({
+			  //       idSpecific: _id._id
+		   //    })
+		   //  })
+		   //  .then(response => response.json())
+		   //  .then(data => {
+		   //  	this.setState({teststorehistory:data})
+		   //  	this.addhistory(_id)
+		   //  	this.addview(id_comic)
+		   //  })
+	    // }
 	    
 
-	    // let a = {_id}._id._id;
+	    // let a = {_id}._id._id;ttt
 	    // fetch('http://localhost:3000/storehistory', {
 	    //   method: 'post',
 	    //   headers: {'Content-Type': 'application/json'},
@@ -101,6 +104,15 @@ addhistory(_id){
 		       	email: this.props.user,
 		        idSpecific: _id._id,
 		        test:this.state.teststorehistory
+	      })
+	})
+}
+addview(id_comic){
+	fetch('http://localhost:3000/addview', {
+	      method: 'post',
+	      headers: {'Content-Type': 'application/json'},
+	       body: JSON.stringify({
+		       	id:id_comic.id
 	      })
 	})
 }
@@ -146,12 +158,18 @@ componentWillMount() {
 	.then(response => response.json())
     .then(data => {
       this.setState({testnumberhistory:data})
-      console.log("testnumberhistory")
-      console.log(this.state.testnumberhistory)
       this.recommend();
     })
 
     //end test
+    fetch('http://localhost:3000/nohistory', {
+      method: 'get',
+      headers: {'Content-Type': 'application/json'},
+    })
+    .then(response => response.json())
+    .then(data => {
+      this.setState({storeNohistory:data})
+    })
 }
 recommend (){
 	fetch('http://localhost:3000/recommend', {		//find ep from history
@@ -177,15 +195,15 @@ getTypeRecommend (){
     })
     .then(response => response.json())
     .then(data => {
-    	console.log("get type recommend")
-    	console.log(data)
       this.setState({history3:data})
     })
 }
-
+componentWillReceiveProps(nextProps,nextState) {
+	this.setState({route: 'home'});
+}
 	render(){
 		const { isSignedIn, searchfield, data, route, dataEp, idComic, idEp, 
-			comic, epcomic, allepcomic, history, history3, testhistory } = this.state;
+			comic, epcomic, allepcomic, history, history3, testhistory, storeNohistory } = this.state;
 		const { user } = this.props;
 		const filteredData = epcomic.filter(detail =>{ // follow date
 			return detail.name.toLowerCase().includes(searchfield.toLowerCase());
@@ -194,9 +212,12 @@ getTypeRecommend (){
 		const filteredData3 = history3.filter(detail =>{ // follow date
 			return detail.name.toLowerCase().includes(searchfield.toLowerCase());
 		})
-		console.log("home")
-		console.log(this.props.user)
-		console.log(this.props.value)
+
+		const filteredData4 = storeNohistory.filter(detail =>{ // follow date
+			return detail.name.toLowerCase().includes(searchfield.toLowerCase());
+		})
+		const size = filteredData3.length
+		console.log(route)
 		return(
 				<div>
 					<br/><br/>
@@ -207,7 +228,15 @@ getTypeRecommend (){
 							<div>
 								<h1 className ='tc'>Recommended Manga</h1>
 								<Update>
-									<Slideshow style={{width: '1000px'}} history={filteredData3}/>
+								{
+									size === 1 ?
+									(
+										<Slideshow style={{width: '1000px'}} history={filteredData3}  onRouteChange={this.onRouteChange}/>
+									):
+									(
+										<Slideshow style={{width: '1000px'}} history={filteredData4}  onRouteChange={this.onRouteChange}/>
+									)
+								}
 								</Update>
 								<UpdateHistory data = {filteredData} history={testhistory} onRouteChange={this.onRouteChange}/>
 							</div>

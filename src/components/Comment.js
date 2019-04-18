@@ -16,7 +16,7 @@ class Comment extends React.Component {
     	this.setState({comment: event.target.value})
   	}
   	onSubmit = () => {
-  		if(this.state.comment!= ""){
+  		if(this.state.comment!== ""){
   			let timerInterval
 			Swal.fire({
 			  title: 'Posting!',

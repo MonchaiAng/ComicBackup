@@ -8,17 +8,19 @@ const UpdateHistory = ({data, history, onRouteChange, user}) => {
 	return (
 		<div>
 			<table>
-				<tr>
-					<td valign='top' width='880px'>
-						<Update>
-							<Push data={data} onRouteChange={onRouteChange}/> 
-						</Update>
-					</td>
-					<td valign='top' width='30opx'>
-						<BoxEp data={history} onRouteChange={onRouteChange}/>
-						<TopManga onRouteChange={onRouteChange}/>
-					</td>
-				</tr>
+				<tbody>
+					<tr>
+						<td valign='top' width='880px'>
+							<Update>
+								<Push data={data} onRouteChange={onRouteChange}/> 
+							</Update>
+						</td>
+						<td valign='top' width='30opx'>
+							<BoxEp data={history} onRouteChange={onRouteChange}/>
+							<TopManga onRouteChange={onRouteChange}/>
+						</td>
+					</tr>
+				</tbody>
 			</table>
 		</div>
 	);

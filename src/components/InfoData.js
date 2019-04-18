@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import BoxEp from '../containers/BoxEp.css';
+// import BoxEp from '../containers/BoxEp.css';
 
 class InfoData extends Component{
 	constructor(props){	
@@ -11,6 +11,7 @@ class InfoData extends Component{
 	componentWillMount() {
 		console.log("InfoData")
 		console.log(this.props.data)
+		
 		fetch('http://localhost:3000/favorites', {
 	      method: 'post',
 	      headers: {'Content-Type': 'application/json'},

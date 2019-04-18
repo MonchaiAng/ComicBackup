@@ -10,6 +10,17 @@ app.use(bodyParser.json());
 app.use(cors())
 app.use(bodyParser.urlencoded({ extended: true }));
 		
+		//getpages
+		app.post('/getpages',(req,res)=>{
+			MongoClient.connect(url, (err, db) => { 
+    		db.collection("epbook", (error, collection) => {
+					collection.findOne({ id: req.body.id,ch:req.body.ep},function(err, document) { 
+						res.json(document.allpages)
+			            db.close();
+			        });
+			   });
+			});
+		}); 
 		//addhistory start test
 		app.post('/setep',(req,res)=>{
 			MongoClient.connect(url, (err, db) => { 
@@ -30,6 +41,22 @@ app.use(bodyParser.urlencoded({ extended: true }));
 			        ], (error, result) => { 
 			            db.close();
 			        });
+			   });
+			});
+		}); 
+
+		app.post('/addview',(req,res)=>{
+			MongoClient.connect(url, (err, db) => { 
+    		db.collection("book", (error, collection) => {
+    			// console.log(req.body.id)
+    			collection.findOne({_id:req.body.id},function(err, document) {
+    				let plusOne = document.view+1
+    				collection.update(
+						{ "_id": req.body.id},
+			            { $set:{view: plusOne }},
+			        ); 
+    			});
+					
 			   });
 			});
 		}); 
@@ -72,25 +99,26 @@ app.use(bodyParser.urlencoded({ extended: true }));
 						const a = document.length;
 						collection.find({tag:'comedy',_id:{$in:req.body.history1}}).toArray(function(err, document) {
 							const b = document.length;
-							console.log(a)
-							console.log(b)
-								if(a>b){	
-
-									console.log("drama")
-									res.json("Drama")
+								const Havehistory = a>2 || b>2
+								if(Havehistory){
+									if(a>b){	
+										res.json("Drama")
+									}else{
+										res.json("comedy")
+									}
 								}else{
-									console.log("comedy")
-									res.json("comedy")
+									res.json("Topview")
 								}
 							}); 
 				   });
 				});
 			}); 
 		}); 
+		
 		app.post('/getTypeRecommend',(req,res)=>{
 			MongoClient.connect(url, (err, db) => { 
 	    		db.collection("book", (error, collection) => {
-	    			collection.find({'tag':'Drama'}).count()
+	    			collection.find({tag:req.body.recommend}).count()
 	    			.then(data=> {
 	    				let a = Math.floor(Math.random() * Math.floor(data));
 	    				collection.find({tag:req.body.recommend}).skip(a).limit(1).toArray(function(err, document) {
@@ -344,6 +372,15 @@ app.use(bodyParser.urlencoded({ extended: true }));
 			});
 		});
 
+		app.get('/nohistory',(req,res)=>{
+			MongoClient.connect(url, (err, db) => { 
+    		db.collection("book", (error, collection) => {
+					collection.find().sort({view:-1}).limit(1).toArray(function(err, document) {
+						res.json(document) 
+					}); 
+			   });
+			});
+		});
 		
 
 			// database.users.push({

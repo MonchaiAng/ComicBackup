@@ -1,15 +1,15 @@
 import React, { Component } from 'react';
 import Particles from 'react-particles-js';
-import Navigation from '../components/navigation/Navigation';
+// import Navigation from '../components/navigation/Navigation';
 import Navigation2 from '../components/navigation/Navigation2';
 import Signin from '../Signin/Signin';
 import Register from '../Register/Register';
-import Slideshow from '../components/slideshow/Slideshow';
-import UpdateHistory from '../components/UpdateHistory';
-import DropListEpisodes from '../components/dropdown/dropListEpisodes';
-import AllEp from '../components/AllEp';
-import Home from '../components/Home';
-import { createBrowserHistory } from 'history';
+// import Slideshow from '../components/slideshow/Slideshow';
+// import UpdateHistory from '../components/UpdateHistory';
+// import DropListEpisodes from '../components/dropdown/dropListEpisodes';
+// import AllEp from '../components/AllEp';
+// import Home from '../components/Home';
+// import { createBrowserHistory } from 'history';
 import './App.css';
 
 
@@ -97,30 +97,30 @@ class App extends Component{
     }
 	render() {		
 		
-		const { isSignedIn, searchfield, data, route, dataEp, idComic, idEp } = this.state;
+		const { isSignedIn, route } = this.state;
 		// const filteredRobots = robots.filter(robot =>{
 		// 	return robot.name.toLowerCase().includes(searchfield.toLowerCase());
 		// })
 		// const filteredData = data.filter(detail =>{
 		// 	return detail.name.toLowerCase().includes(searchfield.toLowerCase());
 		// })
-		const { value, suggestions } = this.state;
-	    const inputProps = {
-	      placeholder: "search comics",
-	      value,
-	      onChange: this.onChange
-	    };
-	    const history = createBrowserHistory();
-	    const location = history.location;
+		// const { value } = this.state;
+	    // const inputProps = {
+	    //   placeholder: "search comics",
+	    //   value,
+	    //   onChange: this.onChange
+	    // };
+	    // const history = createBrowserHistory();
+	    // const location = history.location;
 
 		// Listen for changes to the current location.
-		const unlisten = history.listen((location, action) => {
+		// const unlisten = history.listen((location, action) => {
 		  // location is an object like window.location
-		  console.log(action, location.pathname, location.state);
-		});
-		{/*<Navigation/>
-				<SearchBox searchChange={this.onSearchChange}/>
-	     */}
+		  // console.log(action, location.pathname, location.state);
+		// });
+		// <Navigation/>
+				// <SearchBox searchChange={this.onSearchChange}/>
+	     
 		return(
 	      <div>   
 	        {

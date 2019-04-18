@@ -7,13 +7,14 @@ class Search2 extends Component{
 	}
 	onClickAllEp({_id}){
 		let id = _id;
-		console.log("seach2");
-		console.log({id});
   		this.props.onRouteChange('allep',1,{id});
   	}
+  	// componentWillReceiveProps(nextProps) {
+  	// 	console.log(nextProps.name)
+  	// }
 	render(){
 		const {_id, name, value, author} = this.props;
-		console.log({value})
+		// console.log({author})
 		return (
 			<div>
 			{

@@ -1,6 +1,6 @@
 import React from 'react';
 import Slideshow2 from './Slideshow2';
-import { Fade } from 'react-slideshow-image';
+// import { Fade } from 'react-slideshow-image';
 import './Slideshow.css';
 
 // const fadeImages = [   
@@ -23,11 +23,11 @@ class Slideshow extends React.Component {
     super(props);
   }
   render(){
-    const { history } = this.props;
-    console.log({history})
+    const { history, onRouteChange} = this.props;
+    // console.log({history})
     return (
       <div className='tc'>
-        <Slideshow2 history={history}/>
+        <Slideshow2 history={history} onRouteChange={onRouteChange} />
       </div>
     );
   }

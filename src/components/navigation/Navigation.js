@@ -136,7 +136,7 @@ class Navigation extends Component{
 						/>
 				      	<Route exact={true} path="/" render={(props) => <Home {...props} user={comic} value={value}/>}/>
 				      	{/*<Route exact={true} component={Home}/>*/}
-				      	<Route path="/sort" render={(props) => <Sort {...props} user={comic}/>}/>
+				      	<Route path="/sort" render={(props) => <Sort {...props} user={comic} value={value}/>}/>
 				      	<Route path="/alert" render={(props) => <Alert {...props} user={comic}/>}/>
 				    </div>
 				</Router>
