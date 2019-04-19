@@ -13,23 +13,18 @@ import Autosuggest from 'react-autosuggest';
 	const languages = [
 	  {
 	    name: 'Nidome',
-	    year: 1972
 	  },
 	  {
 	    name: 'Martial',
-	    year: 1972
 	  },
 	  {
 	    name: 'Dr. Stone',
-	    year: 1972
 	  },
 	  {
 	    name: 'Solo Leveling',
-	    year: 2000
 	  },
 	  {
 	    name: 'Eden zero',
-	    year: 2000
 	  },
 	];
 
@@ -71,7 +66,7 @@ class Navigation extends Component{
 				value: '',
 	      		suggestions: [],
 				searchfield: '',
-				nameComic:[]
+				nameComic:[],
 			}
 	}
 	onChange = (event, { newValue, method }) => {
@@ -91,7 +86,18 @@ class Navigation extends Component{
 		  suggestions: []
 		});
 	};
+	componentWillMount() {
+		// fetch('http://localhost:3000/getname', {
+	 //      method: 'get',
+	 //      headers: {'Content-Type': 'application/json'},
+	 //    })
+	 //    .then(response => response.json())
+	 //    .then(data => {
+	 //      this.setState({nameComic:data})
+	 //    })
+	}
 	componentDidMount() {
+
 		// fetch('http://localhost:3000/book', {
 	 //      method: 'get',
 	 //      headers: {'Content-Type': 'application/json'},
@@ -104,13 +110,14 @@ class Navigation extends Component{
 	 //    })
 	}	
 	render(){
-		const { value, suggestions } = this.state;
+		const { value, suggestions, nameComic } = this.state;
 	    const inputProps = {
 	      placeholder: "search comics",
 	      value,
 	      onChange: this.onChange
 	    };
 		const { comic } =this.props;
+
 		return (
 			<div className='pa2 tr'>
 				<Router>

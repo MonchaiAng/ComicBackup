@@ -1,7 +1,6 @@
 import React from 'react';
-import logo from '../img/0_1_1.svg';
 import Allpages from './Allpages';
-import Update from './Update'
+import Update from '../Update'
 class Page extends React.Component {
 	constructor(props) {
 		super(props);

@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import Alert1 from './Alert1';
 import Update from '../Update';
-import DropListEpisodes from '../dropdown/dropListEpisodes';
+import DropListEpisodes from '../dropdown/DropListEpisodes';
 import AllEp from '../AllEp';
 class Alert extends Component{
 	constructor(props){	

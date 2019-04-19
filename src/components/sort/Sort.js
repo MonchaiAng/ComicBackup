@@ -3,7 +3,7 @@ import Update from '../Update';
 import Sort2 from './Sort2';
 import Search from '../search/Search';
 import AllEp from '../AllEp';
-import DropListEpisodes from '../dropdown/dropListEpisodes';
+import DropListEpisodes from '../dropdown/DropListEpisodes';
 
 class Sort extends Component{
 	constructor(props){

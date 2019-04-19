@@ -1,7 +1,7 @@
 import React from 'react';
 import DropComic2 from './DropComic2';
 import DropEp2 from './DropEp2';
-import './dropListEpisodes.css';
+import './DropListEpisodes.css';
 class DropComic extends React.Component {
 	constructor(props) {
 		super(props)

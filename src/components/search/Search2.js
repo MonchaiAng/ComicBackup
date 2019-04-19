@@ -4,32 +4,43 @@ import './Search.css';
 class Search2 extends Component{
 	constructor(props){	
 		super(props)
+		this.state={
+			count:0
+		}
 	}
-	onClickAllEp({_id}){
-		let id = _id;
-  		this.props.onRouteChange('allep',1,{id});
+	onClickAllEp({id}){
+		// console.log("12313123")
+		let ch = 1 
+		// console.log({ch})
+		// console.log({id})
+  		this.props.onRouteChange('allep',{ch},{id});
   	}
-  	// componentWillReceiveProps(nextProps) {
-  	// 	console.log(nextProps.name)
+  	// componentDidMount(){
+  	// 	let id = 0
+  	// 	let ch = 1 
+  	// 	this.props.onRouteChange('allep',{ch},{id});
   	// }
+  	componentWillReceiveProps(nextProps) {
+  		let value = nextProps.value
+  		let name = nextProps.name
+		let id = nextProps.id
+
+  		if(value == name){
+			let size = this.state.count
+			size++
+			this.setState({count:size})
+			if(size%15 == 0){
+				console.log(this.state.count)
+				this.onClickAllEp({id})
+			}
+  		}
+  	}
 	render(){
-		const {_id, name, value, author} = this.props;
+		const {id, name, value, author} = this.props
+	
 		// console.log({author})
 		return (
 			<div>
-			{
-				value == name || value == author?
-				(	
-					<div>
-						<br/>
-						<button type="Submit" onClick={() => this.onClickAllEp({_id})}>
-							Search
-         				</button>
-					</div>	
-					// <h1 onClick={() => this.onClickAllEp({_id})}>{name}</h1>
-				):
-					<p></p>
-			}
 			</div>
 		);
 	};

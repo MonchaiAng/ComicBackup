@@ -1,6 +1,6 @@
 import React from 'react';
-import './dropListEpisodes.css';
-import Page from '../Page';
+import './DropListEpisodes.css';
+import Page from '../page/Page';
 import DropComic from './DropComic';
 
 class dropListEpisodes extends React.Component {

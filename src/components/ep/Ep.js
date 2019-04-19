@@ -10,7 +10,7 @@ class Ep extends React.Component {
   		this.props.onRouteChange('ep',{ch},{id},{_id});
   	}
   	render(){
-  		const {_id, id , name, namebook , img, view, ch} = this.props;
+  		const {_id, id , count,name, namebook , img, view, ch} = this.props;
 		return(
 			<div>
 				<div className='table_div' onClick={() => this.onClickAllEp({ch},{id},{_id})}>
@@ -20,14 +20,13 @@ class Ep extends React.Component {
 								<td width = '15%'>
 									<img alt='comics' src= {img} width = '70px' height='70px' />
 								</td>
-								<td width = '40%'>
-									<p className = 'tl'>{namebook} {name}</p>
+								<td width = '50%'>
+									<p className = 'tl'>{namebook} Ch.{ch} {name}</p>
 								</td>
-								<td width = '30%'>
+								<td width = '25%'>
 									<p className = 'tr'>{view}</p>
 								</td>
-								<td width = '5%'>
-								</td>
+								
 							</tr>
 						</tbody>
 					</table>

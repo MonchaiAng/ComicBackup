@@ -10,6 +10,22 @@ app.use(bodyParser.json());
 app.use(cors())
 app.use(bodyParser.urlencoded({ extended: true }));
 		
+		//getName 
+		app.get('/getname',(req,res)=>{
+			MongoClient.connect(url, (err, db) => { 
+    		db.collection("book", (error, collection) => {
+					collection.find().toArray(function(err, document) {
+						let arrayname = []
+						for(let i=0;i<document.length;i++){
+							arrayname.push(document[i].name)
+						} 
+						console.log(arrayname)
+						res.json(arrayname)
+			            db.close();
+			        });
+			   });
+			});
+		}); 
 		//getpages
 		app.post('/getpages',(req,res)=>{
 			MongoClient.connect(url, (err, db) => { 
@@ -34,7 +50,7 @@ app.use(bodyParser.urlencoded({ extended: true }));
 		}); 
 
 		app.post('/addhistory',(req,res)=>{
-			MongoClient.connect(url, (err, db) => { 
+			MongoClient.connect(url, (err, db) => {
     		db.collection("history", (error, collection) => {
 					collection.insert([
 			            { email: req.body.email, idEp: req.body.idSpecific, test:req.body.test,date: new Date() },

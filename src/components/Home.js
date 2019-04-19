@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import Slideshow from '../components/slideshow/Slideshow';
 import UpdateHistory from './UpdateHistory';
 import AllEp from '../components/AllEp';
-import DropListEpisodes from '../components/dropdown/dropListEpisodes';
+import DropListEpisodes from '../components/dropdown/DropListEpisodes';
 import Update from './Update';
 import EpList from '../components/ep/EpList';
 import { BrowserRouter as Router, Route, Link } from "react-router-dom";
@@ -199,7 +199,8 @@ getTypeRecommend (){
     })
 }
 componentWillReceiveProps(nextProps,nextState) {
-	this.setState({route: 'home'});
+	this.setState({route: 'home'})
+	this.componentWillMount()
 }
 	render(){
 		const { isSignedIn, searchfield, data, route, dataEp, idComic, idEp, 
@@ -217,7 +218,7 @@ componentWillReceiveProps(nextProps,nextState) {
 			return detail.name.toLowerCase().includes(searchfield.toLowerCase());
 		})
 		const size = filteredData3.length
-		console.log(route)
+
 		return(
 				<div>
 					<br/><br/>
