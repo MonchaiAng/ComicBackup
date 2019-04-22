@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 // import BoxEp from '../containers/BoxEp.css';
-
+import star from '../img/star-icon.svg'
 class InfoData extends Component{
 	constructor(props){	
 		super(props)
@@ -52,11 +52,12 @@ class InfoData extends Component{
 		render(){
 		const { data,user } = this.props; 
 		const { added } = this.state;
+		const a = require('../img/'+data.img);
 		return (
 			<div>
 					<tr>
 						<th width = '330px' height = '385px' className = 'tc' valign="middle">
-							<img alt='comics' src= {data.img} width = '250px' height='350px' />
+							<img alt='comics' src= {a} width = '250px' height='350px' />
 						</th>
 						<div>
 							<h1 className="tl">{data.name}</h1>
@@ -81,7 +82,8 @@ class InfoData extends Component{
 								(
 									<button className = 'pa2'type= 'button' onClick={this.onAdd}> Add to Favourite</button>
 								):
-									<button className = 'pa2'type= 'button' onClick={this.onRemove}> Un Favourite</button>
+									<button className = 'pa2'type= 'button' onClick={this.onRemove}>
+									<img  alt='star' src= {star} width='15px' height='15px'/> Add to Favourite</button>
 							}
 							</td>
 					</tr>

@@ -15,9 +15,6 @@ const Search = ({data, value, onRouteChange}) => {
 							value = {value}
 							author = {data[i].author}
 							onRouteChange = {onRouteChange}
-							// img={data[i].img}
-							// brief={data[i].brief}
-							// onRouteChange={onRouteChange}
 						/>
 					);
 				})

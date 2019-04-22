@@ -6,25 +6,25 @@ import Alert from "../alert/Alert";
 import AllEp from "../AllEp";
 import Profile from '../Profile';
 import './Navigation.css';
-
+import Bell from '../../img/testbell.svg'
 import Autosuggest from 'react-autosuggest';
-
+import Search from '../search/Search';
 
 	const languages = [
 	  {
-	    name: 'Nidome',
+	    name: 'Fantasia tales',
 	  },
 	  {
-	    name: 'Martial',
+	    name: 'Fate of Destiny',
 	  },
 	  {
-	    name: 'Dr. Stone',
+	    name: 'Hele x Buster',
 	  },
 	  {
-	    name: 'Solo Leveling',
+	    name: 'Idol Fantasy',
 	  },
 	  {
-	    name: 'Eden zero',
+	    name: 'Kisune no miko',
 	  },
 	];
 
@@ -67,12 +67,16 @@ class Navigation extends Component{
 	      		suggestions: [],
 				searchfield: '',
 				nameComic:[],
+				comic:[],
+				enter: '',
 			}
 	}
+
 	onChange = (event, { newValue, method }) => {
 	    this.setState({
 	      value: newValue
 	    });
+	    this.setState({enter:''})
 	  };
 	  
 	onSuggestionsFetchRequested = ({ value }) => {
@@ -86,7 +90,23 @@ class Navigation extends Component{
 		  suggestions: []
 		});
 	};
+
+	onEnter = (event) =>{
+		var keycode = (event.keyCode ? event.keyCode : event.which);
+	    if(keycode == '13'){
+	      this.setState({enter:'enter'})
+	    }
+	}
+
 	componentWillMount() {
+		fetch('http://localhost:3000/book', {
+      method: 'get',
+      headers: {'Content-Type': 'application/json'},
+    })
+    .then(response => response.json())
+    .then(data => {
+      this.setState({comic:data})
+    })
 		// fetch('http://localhost:3000/getname', {
 	 //      method: 'get',
 	 //      headers: {'Content-Type': 'application/json'},
@@ -110,18 +130,20 @@ class Navigation extends Component{
 	 //    })
 	}	
 	render(){
-		const { value, suggestions, nameComic } = this.state;
+		const { value, suggestions, nameComic, enter } = this.state;
+		const { comic, onChange } =this.props;
 	    const inputProps = {
 	      placeholder: "search comics",
 	      value,
-	      onChange: this.onChange
+	      onChange: this.onChange,
+	      onKeyPress:this.onEnter
 	    };
-		const { comic } =this.props;
+		
 
 		return (
-			<div className='pa2 tr'>
+			<div className='pa2 tr fix_div'>
 				<Router>
-					<div>
+					<div >
 						<ul>
 						  <li className='li_Na'>
 						  	<Link to = "" className= 'asd f3'>Comic E-book</Link>
@@ -130,7 +152,9 @@ class Navigation extends Component{
 						  	<Link to ="/Sort" className= 'f3'>Sort</Link>
 						  </li>
 						   <li className='li_Na'>
-						  	<Link to ="/Alert" className= 'f3'>Alert</Link>
+						  	<Link to ="/Alert" className= 'f3'><img alt='comics' 
+						  	src= 'https://scontent.fbkk10-1.fna.fbcdn.net/v/t1.15752-9/51548068_2235881983294806_4769825241092325376_n.png?_nc_cat=102&_nc_ht=scontent.fbkk10-1.fna&oh=e3e1073bdb1abc21ceb2629707928f9e&oe=5D35BF5E' 
+						  	width = '33px' height='33px'/></Link>
 						  </li>
 						</ul>
 						<Autosuggest 
@@ -141,7 +165,7 @@ class Navigation extends Component{
 					        renderSuggestion={renderSuggestion}
 					        inputProps={inputProps} 
 						/>
-				      	<Route exact={true} path="/" render={(props) => <Home {...props} user={comic} value={value}/>}/>
+				      	<Route exact={true} path="/" render={(props) => <Home {...props} user={comic} value={value} enter={enter}/>}/>
 				      	{/*<Route exact={true} component={Home}/>*/}
 				      	<Route path="/sort" render={(props) => <Sort {...props} user={comic} value={value}/>}/>
 				      	<Route path="/alert" render={(props) => <Alert {...props} user={comic}/>}/>

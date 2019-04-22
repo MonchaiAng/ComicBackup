@@ -10,9 +10,7 @@ class DropEp2 extends React.Component {
 		console.log("click")
 		console.log(id)
 		console.log(ch)
-  		// let ch = 1
-  		// let id = _id
-  		this.props.onRouteChange('ep',{ch},{id});
+        this.props.onRouteChange('ep',{ch},{id});
   	}
   	render(){
   		const { count, name, id , ch } = this.props

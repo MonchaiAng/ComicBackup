@@ -10,6 +10,20 @@ app.use(bodyParser.json());
 app.use(cors())
 app.use(bodyParser.urlencoded({ extended: true }));
 		
+		app.post('/findidspecific',(req,res)=>{
+			MongoClient.connect(url, (err, db) => { 
+    		db.collection("epbook", (error, collection) => {
+    			console.log("findidspecific")
+    			console.log(req.body.id)
+    			console.log(req.body.ch)
+					collection.findOne({ id: req.body.id,ch:req.body.ch},function(err, document) { 
+						console.log(document._id)
+						res.json(document._id)
+			            db.close();
+			        });
+			   });
+			});
+		}); 
 		//getName 
 		app.get('/getname',(req,res)=>{
 			MongoClient.connect(url, (err, db) => { 
@@ -19,7 +33,7 @@ app.use(bodyParser.urlencoded({ extended: true }));
 						for(let i=0;i<document.length;i++){
 							arrayname.push(document[i].name)
 						} 
-						console.log(arrayname)
+						
 						res.json(arrayname)
 			            db.close();
 			        });
@@ -41,7 +55,8 @@ app.use(bodyParser.urlencoded({ extended: true }));
 		app.post('/setep',(req,res)=>{
 			MongoClient.connect(url, (err, db) => { 
     		db.collection("epbook", (error, collection) => {
-					collection.find({ _id: req.body.idSpecific }).toArray(function(err, document) { 
+					collection.findOne({ ch:req.body.ch,id:req.body.id},function(err, document) { 
+						// console.log(document)
 						res.json(document)
 			            db.close();
 			        });
@@ -55,7 +70,8 @@ app.use(bodyParser.urlencoded({ extended: true }));
 					collection.insert([
 			            { email: req.body.email, idEp: req.body.idSpecific, test:req.body.test,date: new Date() },
 			        ], (error, result) => { 
-			            db.close();
+			        	res.json(result)
+			        	db.close();
 			        });
 			   });
 			});
@@ -64,13 +80,14 @@ app.use(bodyParser.urlencoded({ extended: true }));
 		app.post('/addview',(req,res)=>{
 			MongoClient.connect(url, (err, db) => { 
     		db.collection("book", (error, collection) => {
-    			// console.log(req.body.id)
     			collection.findOne({_id:req.body.id},function(err, document) {
     				let plusOne = document.view+1
     				collection.update(
 						{ "_id": req.body.id},
 			            { $set:{view: plusOne }},
 			        ); 
+			        res.json(document)
+			        db.close();
     			});
 					
 			   });
@@ -83,7 +100,7 @@ app.use(bodyParser.urlencoded({ extended: true }));
 					collection.find({ email: req.body.email }).sort({date:-1}).limit(3).toArray(function(err, document) { 
 						let arrayhistory = []
 						for(let i=document.length-1;i>=0;i--){
-							arrayhistory.push(document[i].test[0])
+							arrayhistory.push(document[i].test)
 						}
 						res.json(arrayhistory)
 			            db.close();
@@ -251,7 +268,8 @@ app.use(bodyParser.urlencoded({ extended: true }));
 				  		res.json('success');
 				  	}
 				  	else{
-				  		res.status(400).json('pass kub');
+				  		res.json('failed')
+				  		// res.status(400).json('pass kub');
 				  	}  
 				}); 
 			   });
@@ -339,7 +357,7 @@ app.use(bodyParser.urlencoded({ extended: true }));
     			}
 
 				collection.find({id:a}).toArray(function(err, document) {
-					console.log(document)
+					// console.log(document)
 					res.json(document)
 				}); 
 			   });

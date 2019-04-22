@@ -4,6 +4,9 @@
 .asd{
   background-color: #9da6e6;
 }
+.fix_div{
+  max-height: 70px; 
+}
 .react-autosuggest__container {
   position: relative;
   display: inline-block;

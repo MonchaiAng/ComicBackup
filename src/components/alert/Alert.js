@@ -107,17 +107,14 @@ class Alert extends Component{
 	}
 	componentWillReceiveProps(nextProps,nextState) {
 		this.setState({route: 'sort'});
+		this.componentWillMount();
 	}
 	render(){
 		const { user } = this.props;
 		const { comicFavorites, haveAlert, EpAlert,comic, route, idComic, allepcomic, idEp, sortcomic, sort  } = this.state;
-		// console.log({comicFavorites})
-		console.log("alert")
-		console.log(comic[idComic])
-		console.log(idComic.id)
 		return(
 			<div className ="tc">
-			<br/><br/>
+			<br/><br/><br/>
 			{
 					haveAlert === 1 && route === 'sort'?
 					(

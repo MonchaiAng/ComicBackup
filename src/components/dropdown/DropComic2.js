@@ -3,19 +3,21 @@ import React from 'react';
 class DropComic2 extends React.Component {
 	constructor(props) {
 		super(props)
+    this.state={
+      idEp:''
+    }
   	}
-  	onClickSelectComic({_id, name}){
+  	onClickSelectComic({_id}){
   		let ch = 1
   		let id = _id
-  		this.props.onRouteChange('ep',{ch},{id});
-  		// console.log("onClicks")
-  		// console.log(name)
+      this.props.onRouteChange('ep',{ch},{id});
+
   	}
 
   	render(){
   		const { _id, name } = this.props;
 		return(
-			<div onClick={() => this.onClickSelectComic({_id, name})}>
+			<div onClick={() => this.onClickSelectComic({_id})}>
 				<a>{name}</a>
 			</div>
 		);

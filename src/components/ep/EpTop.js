@@ -13,6 +13,7 @@ class Ep extends React.Component {
   	}
   	render(){
   		const {_id, name , img, view} = this.props;
+  		const a = require('../../img/'+img);
 		return(
 			<div>
 				<div className='table_div' onClick={() => this.onClickAllEp({_id})}>
@@ -20,7 +21,7 @@ class Ep extends React.Component {
 						<tbody>
 							<tr className = 'trEp'>
 								<td width = '15%'>
-									<img alt='comics' src= {img} width = '70px' height='70px' />
+									<img alt='comics' src= {a} width = '70px' height='70px' />
 								</td>
 								<td width = '40%'>
 									<p className = 'tl'>{name}</p>

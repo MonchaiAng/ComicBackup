@@ -7,10 +7,12 @@ class EpDataList extends React.Component {
 		super(props);
   	}
 	onClickAllEp({ch},{id}){
-  		this.props.onRouteChange('ep',{ch},{id});
+        this.props.onRouteChange('ep',{ch},{id});
+     
   	}
 	render(){
 		const {id, ch, img, date ,name} = this.props;
+		const a = require('../../img/'+img);
 		return(	
 			<div>
 				<Router>
@@ -20,7 +22,7 @@ class EpDataList extends React.Component {
 								<tbody>
 									<tr className = 'trEp'>
 										<td width = '10%'>
-											<img alt='comics' src= {img} width = '70px' height='70px' />
+											<img alt='comics' src= {a} width = '70px' height='70px' />
 										</td>
 										<td width = '35%'>
 											<p className = 'tl'>Episodes{ch}: {name}</p>

@@ -37,6 +37,10 @@ class Sort extends Component{
 	    	this.setState({route: route});
 	    	this.setState({idComic:id_comic})
 	    	this.setState({idEp:id})
+	    	console.log("allep")
+	    	console.log(this.state.route)
+	    	console.log(this.state.idComic)
+	    	console.log(this.state.idEp)
 	    	if(typeof(this.state.idComic) == 'object'){
 	    		this.setState({idComic:id_comic.id})
 	    	}
@@ -49,7 +53,8 @@ class Sort extends Component{
 		    })
 		    .then(response => response.json())
 		    .then(data => {
-		    	// console.log(data)
+		    	console.log("data")
+		    	console.log(data)
 		      this.setState({allepcomic:data})
 		    })
 
@@ -100,8 +105,7 @@ class Sort extends Component{
 		return(
 			
 				<div className="tc">
-				{/*<br/><br/>
-				<Search data={comic} value={this.props.value} onRouteChange={this.onRouteChange}/>*/}
+				{/*<Search className="tr"data={comic} value={this.props.value} onRouteChange={this.onRouteChange}/>*/}
 					{	
 						route === 'sort'?
 						(

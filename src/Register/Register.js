@@ -1,4 +1,5 @@
 import React from 'react';
+import hash from 'object-hash';
 
 class Register extends React.Component {
   constructor(props) {
@@ -28,7 +29,7 @@ class Register extends React.Component {
       headers: {'Content-Type': 'application/json'},
       body: JSON.stringify({
         email: this.state.email,
-        password: this.state.password,
+        password: hash(this.state.password),
         name: this.state.name
       })
     })

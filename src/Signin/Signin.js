@@ -1,6 +1,8 @@
 import React from 'react';
 import Navigation2 from '../components/navigation/Navigation2';
 import Navigation from '../components/navigation/Navigation';
+import hash from 'object-hash';
+import Swal from 'sweetalert2'
 
 class Signin extends React.Component {
   constructor(props) {
@@ -27,7 +29,7 @@ class Signin extends React.Component {
       headers: {'Content-Type': 'application/json'},
       body: JSON.stringify({
         email: this.state.signInEmail,
-        password: this.state.signInPassword
+        password: hash(this.state.signInPassword)
       })
     })
     .then(response => response.json())
@@ -36,6 +38,13 @@ class Signin extends React.Component {
          // this.props.onRouteChange('home');
          this.setState({comic:this.state.signInEmail});
          this.setState({route: 'home'});
+      }
+      else{
+        Swal.fire({
+          type: 'error',
+          title: 'Oops...',
+          text: 'Email or Password is incorrect!',
+        })
       }
     })
 
@@ -49,6 +58,13 @@ class Signin extends React.Component {
     //   this.setState({comic:data})
     // })
 
+  }
+
+  onEnter = (event) => {
+    var keycode = (event.keyCode ? event.keyCode : event.which);
+    if(keycode == '13'){
+      this.onSubmitSignIn()
+    }
   }
 
   onSigninRouteChange = (route,id) => {
@@ -98,6 +114,7 @@ class Signin extends React.Component {
                         name="password"
                         id="password"
                         onChange={this.onPasswordChange}
+                        onKeyPress={this.onEnter}
                       />
                     </div>
                   </fieldset>

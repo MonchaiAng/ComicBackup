@@ -7,10 +7,10 @@ const EpComment = ({data, dataEp, onRouteChange, email}) => {
 			<div>
 				<tbody>
 					<tr>
-						<td>
+						<td valign="top">
 							<Epdata data = {data} dataEp = {dataEp} onRouteChange={onRouteChange}/>
 						</td>
-						<td>
+						<td valign="top">
 							<Comment data={data} email={email} onRouteChange={onRouteChange}/>
 						</td>
 					</tr>

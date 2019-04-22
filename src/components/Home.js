@@ -35,9 +35,9 @@ class Home extends Component{
 			testhistory:[],
 			teststorehistory:{},
 			testnumberhistory:[],
-			storeNohistory:[]
+			storeNohistory:[],
 
-
+			testidspecific:0
 	}
 }
 
@@ -50,8 +50,7 @@ onRouteChange = (route,id,id_comic,_id) => {
     	this.setState({route: route});
     	this.setState({idComic:id_comic})
     	this.setState({idEp:id})
-    	console.log("allep")
-    	console.log(id_comic)
+
 	    fetch('http://localhost:3000/allepbook', {
 	      method: 'post',
 	      headers: {'Content-Type': 'application/json'},
@@ -65,55 +64,79 @@ onRouteChange = (route,id,id_comic,_id) => {
 	    })
 
     }else if(route === 'ep'){
+    	console.log("iN EP")
     	this.setState({route: route});
 	    this.setState({idEp:id});
 	    this.setState({idComic:id_comic})
-	    // if(typeof(_id) !== 'undefined'){
-		   //  fetch('http://localhost:3000/setep', {
-		   //    method: 'post',
-		   //    headers: {'Content-Type': 'application/json'},
-		   //     body: JSON.stringify({
-			  //       idSpecific: _id._id
-		   //    })
-		   //  })
-		   //  .then(response => response.json())
-		   //  .then(data => {
-		   //  	this.setState({teststorehistory:data})
-		   //  	this.addhistory(_id)
-		   //  	this.addview(id_comic)
-		   //  })
-	    // }
 	    
+	    	console.log("ep home")
+	    	// console.log(id.ch)
+	    	// console.log(id_comic.id)
+	    	let ch1 = id.ch
+	    	let id1 = id_comic.id 
+		    // this.findidspecific(ch1,id1)
+		    this.gettesthistory(ch1,id1)
 
-	    // let a = {_id}._id._id;ttt
-	    // fetch('http://localhost:3000/storehistory', {
-	    //   method: 'post',
-	    //   headers: {'Content-Type': 'application/json'},
-	    //    body: JSON.stringify({
-		   //     	user: this.props.user,
-		   //      storehistory: a
-	    //   })
-	    // })
 	}
 }
-addhistory(_id){
+gettesthistory = (ch, id) =>{
+    fetch('http://localhost:3000/setep', {
+	      method: 'post',
+	      headers: {'Content-Type': 'application/json'},
+	       body: JSON.stringify({
+		        ch: ch,
+		        id: id
+	      })
+	    })
+	    .then(response => response.json())
+	    .then(data => {
+	    	// console.log(data)
+	    	this.setState({testidspecific:data._id})
+	    	this.setState({teststorehistory:data})
+	    	this.addhistory()
+		    this.addview()
+	})
+}
+addhistory = () =>{
+	console.log(this.state.teststorehistory)
 	fetch('http://localhost:3000/addhistory', {
 	      method: 'post',
 	      headers: {'Content-Type': 'application/json'},
 	       body: JSON.stringify({
 		       	email: this.props.user,
-		        idSpecific: _id._id,
+		        idSpecific: this.state.testidspecific,
 		        test:this.state.teststorehistory
 	      })
 	})
+	.then(response => response.json())
+	.then(data => {
+	    	console.log(data)
+	})
+	// console.log("addhistory")
+	// fetch('http://localhost:3000/book', {
+ //      method: 'get',
+ //      headers: {'Content-Type': 'application/json'},
+ //    })
+ //    .then(response => response.json())
+ //    .then(data => {
+ //      this.setState({comic:data})
+ //    })
+
 }
-addview(id_comic){
+addview = () =>{
+	console.log("addview")
+	console.log(this.state.testidspecific)
+	console.log(this.state.idComic)
 	fetch('http://localhost:3000/addview', {
 	      method: 'post',
 	      headers: {'Content-Type': 'application/json'},
 	       body: JSON.stringify({
-		       	id:id_comic.id
+		       	id:this.state.idComic.id
 	      })
+	})
+	.then(response => response.json())
+	.then(data => {
+	    	console.log(data)
 	})
 }
 componentWillMount() {
@@ -205,7 +228,7 @@ componentWillReceiveProps(nextProps,nextState) {
 	render(){
 		const { isSignedIn, searchfield, data, route, dataEp, idComic, idEp, 
 			comic, epcomic, allepcomic, history, history3, testhistory, storeNohistory } = this.state;
-		const { user } = this.props;
+		const { user ,enter  } = this.props;
 		const filteredData = epcomic.filter(detail =>{ // follow date
 			return detail.name.toLowerCase().includes(searchfield.toLowerCase());
 		})
@@ -218,15 +241,15 @@ componentWillReceiveProps(nextProps,nextState) {
 			return detail.name.toLowerCase().includes(searchfield.toLowerCase());
 		})
 		const size = filteredData3.length
-
 		return(
 				<div>
-					<br/><br/>
-					<Search data={comic} value={this.props.value} onRouteChange={this.onRouteChange}/>
-					{	
+					<Search className ="tr" data={comic} value={this.props.value} onRouteChange={this.onRouteChange}/>
+					<br/>
+					{
 						route === 'home'?
 						(
 							<div>
+
 								<h1 className ='tc'>Recommended Manga</h1>
 								<Update>
 								{
