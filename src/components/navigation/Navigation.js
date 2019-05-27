@@ -6,7 +6,7 @@ import Alert from "../alert/Alert";
 import AllEp from "../AllEp";
 import Profile from '../Profile';
 import './Navigation.css';
-import Bell from '../../img/testbell.svg'
+import Bell from '../../img/bell.svg'
 import Autosuggest from 'react-autosuggest';
 import Search from '../search/Search';
 
@@ -25,6 +25,79 @@ import Search from '../search/Search';
 	  },
 	  {
 	    name: 'Kisune no miko',
+	  },
+	  {
+	    name: 'Zero legendary',
+	  },
+	  {
+	    name: 'Tales of tomorrow',
+	  },
+	  {
+	    name: 'World of music',
+	  },
+	  {
+	    name: 'Sora no hikari',
+	  },
+	  {
+	    name: 'SSS online',
+	  },
+	  {
+	    name: 'Night of star',
+	  },
+	  {
+	    name: 'School of Love',
+	  },
+	  {
+	    name: 'Miko Maiden',
+	  },
+	  {
+	    name: 'Memory of heart',
+	  },
+	  {
+	    name: 'Majo no monogatari',
+	  },
+	  {
+	    name: 'Knight of flame',
+	  },
+	  //author
+	  {
+	    name: 'Jang sung-lak',
+	  },
+	  {
+	    name: 'JUJU',
+	  },
+	  {
+	    name: 'author Dr. stone',
+	  },
+	  {
+	    name: 'author Eden zero',
+	  },
+	  {
+	    name: 'author martial',
+	  },
+	  {
+	    name: 'Monchai',
+	  },
+	  {
+	    name: 'Nattapass',
+	  },
+	  {
+	    name: 'Minus Jung',
+	  },
+	  {
+	    name: 'Cookies',
+	  },
+	  {
+	    name: 'Nami',
+	  },
+	  {
+	    name: 'Namba',
+	  },
+	  {
+	    name: 'Takaeshi',
+	  },
+	  {
+	    name: 'Kenkung',
 	  },
 	];
 
@@ -98,15 +171,19 @@ class Navigation extends Component{
 	    }
 	}
 
+	refreshPage = () =>{ 
+    	window.location.reload(); 
+	}
+
 	componentWillMount() {
 		fetch('http://localhost:3000/book', {
-      method: 'get',
-      headers: {'Content-Type': 'application/json'},
-    })
-    .then(response => response.json())
-    .then(data => {
-      this.setState({comic:data})
-    })
+	      method: 'get',
+	      headers: {'Content-Type': 'application/json'},
+	    })
+	    .then(response => response.json())
+	    .then(data => {
+	      this.setState({comic:data})
+	    })
 		// fetch('http://localhost:3000/getname', {
 	 //      method: 'get',
 	 //      headers: {'Content-Type': 'application/json'},
@@ -146,15 +223,18 @@ class Navigation extends Component{
 					<div >
 						<ul>
 						  <li className='li_Na'>
-						  	<Link to = "" className= 'asd f3'>Comic E-book</Link>
+						  	<Link to = "/" className= 'asd f3'>Comic E-book</Link>
 						  </li>
 						  <li className='li_Na'>
 						  	<Link to ="/Sort" className= 'f3'>Sort</Link>
 						  </li>
 						   <li className='li_Na'>
 						  	<Link to ="/Alert" className= 'f3'><img alt='comics' 
-						  	src= 'https://scontent.fbkk10-1.fna.fbcdn.net/v/t1.15752-9/51548068_2235881983294806_4769825241092325376_n.png?_nc_cat=102&_nc_ht=scontent.fbkk10-1.fna&oh=e3e1073bdb1abc21ceb2629707928f9e&oe=5D35BF5E' 
+						  	src= {Bell} 
 						  	width = '33px' height='33px'/></Link>
+						  </li>
+						  <li className='li_Na'>
+						   <a href="http://localhost:3001/" className='f3'>Logout</a>
 						  </li>
 						</ul>
 						<Autosuggest 
@@ -168,7 +248,7 @@ class Navigation extends Component{
 				      	<Route exact={true} path="/" render={(props) => <Home {...props} user={comic} value={value} enter={enter}/>}/>
 				      	{/*<Route exact={true} component={Home}/>*/}
 				      	<Route path="/sort" render={(props) => <Sort {...props} user={comic} value={value}/>}/>
-				      	<Route path="/alert" render={(props) => <Alert {...props} user={comic}/>}/>
+				      	<Route path="/alert" render={(props) => <Alert {...props} user={comic} value={value}/>}/>
 				    </div>
 				</Router>
 			</div>

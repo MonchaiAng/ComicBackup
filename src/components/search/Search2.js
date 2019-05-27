@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import './Search.css';
 
 class Search2 extends Component{
 	constructor(props){	
@@ -33,17 +32,23 @@ class Search2 extends Component{
 		return (
 			<div>
 			{
-				name === value && name === 'Fantasia tales' || name === author?
+				name === value && name === 'Fantasia tales'?
 				(
 					<div>
 						<br/><br/>
 						<button onClick={() => this.onClickAllEp({id})}>search</button>
 					</div>
-				):name === value || name === author?
+				):name === value?
 				(
 					<div>
 						<br/>
 						<button onClick={() => this.onClickAllEp({id})}>search</button>
+					</div>
+				):value === author?
+				(
+					<div>
+						<br/>
+						<button onClick={() => this.onClickAllEp({id})}>Go to {name}</button>
 					</div>
 				):
 				<p></p>

@@ -24,7 +24,7 @@ class TopManga extends React.Component{
 		const { onRouteChange } = this.props;
 	return(
 		<div>
-			<h1>Top Manga</h1>
+			<h1>Top</h1>
 			<EpListTop data={comic} onRouteChange={onRouteChange}/>
 		</div>
 		);

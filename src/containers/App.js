@@ -59,15 +59,15 @@ class App extends Component{
 	}
 
 
-	loadUser = (data) => {
-	    this.setState({user: {
-	      id: data.id,
-	      name: data.name,
-		  email: data.email,
-	      entries: data.entries,
-	      joined: data.joined
-	    }})
-	}
+	// loadUser = (data) => {
+	//     this.setState({user: {
+	//       id: data.id,
+	//       name: data.name,
+	// 	  email: data.email,
+	//       entries: data.entries,
+	//       joined: data.joined
+	//     }})
+	// }
 	
 	componentDidMount() {
 		// fetch('https://jsonplaceholder.typicode.com/users')
@@ -83,6 +83,7 @@ class App extends Component{
 	}
 	//route signin and signup
 	onRouteChange = (route,id) => {
+		console.log(route)
 	    if (route === 'signout') {
 	      this.setState({isSignedIn: false})
 	    } else if (route === 'home') {
@@ -98,47 +99,26 @@ class App extends Component{
 	render() {		
 		
 		const { isSignedIn, route } = this.state;
-		// const filteredRobots = robots.filter(robot =>{
-		// 	return robot.name.toLowerCase().includes(searchfield.toLowerCase());
-		// })
-		// const filteredData = data.filter(detail =>{
-		// 	return detail.name.toLowerCase().includes(searchfield.toLowerCase());
-		// })
-		// const { value } = this.state;
-	    // const inputProps = {
-	    //   placeholder: "search comics",
-	    //   value,
-	    //   onChange: this.onChange
-	    // };
-	    // const history = createBrowserHistory();
-	    // const location = history.location;
-
-		// Listen for changes to the current location.
-		// const unlisten = history.listen((location, action) => {
-		  // location is an object like window.location
-		  // console.log(action, location.pathname, location.state);
-		// });
-		// <Navigation/>
-				// <SearchBox searchChange={this.onSearchChange}/>
-	     
 		return(
 	      <div>   
 	        {
-	        	(
-	             route === 'signin'
-	             ? <div>
-             	      <Particles className='particles'
+	             route === 'signin'? 
+	             (
+	             	<div>
+             	        <Particles className='particles'
 			             params={particlesOptions}
-		               />
+		                />
 	             		<Signin isSignedIn={isSignedIn} loadUser={this.loadUser} onRouteChange={this.onRouteChange}/>
 	             	</div>
+	             )
 	             : 
+	             (
 	             	<div>
-	             	<Particles className='particles'
-			             params={particlesOptions}
-		               />
-			             <Navigation2 isSignedIn={isSignedIn} onRouteChange={this.onRouteChange} />
-			             <Register loadUser={this.loadUser} onRouteChange={this.onRouteChange}/>
+		             	<Particles className='particles'
+				             params={particlesOptions}
+			            />
+			            <Navigation2 isSignedIn={isSignedIn} onRouteChange={this.onRouteChange} />
+			            <Register loadUser={this.loadUser} onRouteChange={this.onRouteChange}/>
 		            </div>
 	            )
 	       }

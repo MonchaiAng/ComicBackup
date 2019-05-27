@@ -5,13 +5,14 @@ class InfoData extends Component{
 	constructor(props){	
 		super(props)
 		this.state={
-			added:0
+			added:0,
 		}
 	}
 	componentWillMount() {
 		console.log("InfoData")
 		console.log(this.props.data)
-		
+		console.log(this.props.user)
+
 		fetch('http://localhost:3000/favorites', {
 	      method: 'post',
 	      headers: {'Content-Type': 'application/json'},
@@ -25,6 +26,12 @@ class InfoData extends Component{
 	      this.setState({added:data})
 	    })
 	}
+	// componentWillReceiveProps(nextProps,nextState) {
+	// 	console.log("componentWillReceiveProps")
+	// 	console.log(nextProps)
+	// 	// this.setState({route: 'home'})
+	// 	// this.componentWillMount()
+	// }
 	onAdd = () =>{
 		fetch('http://localhost:3000/addfavorite', {
 	      method: 'post',
@@ -53,6 +60,8 @@ class InfoData extends Component{
 		const { data,user } = this.props; 
 		const { added } = this.state;
 		const a = require('../img/'+data.img);
+		// console.log("In render")
+		// console.log({data})
 		return (
 			<div>
 					<tr>

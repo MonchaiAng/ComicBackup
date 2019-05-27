@@ -60,6 +60,8 @@ onRouteChange = (route,id,id_comic,_id) => {
 	    })
 	    .then(response => response.json())
 	    .then(data => {
+	    	console.log("allepcomic")
+	    	console.log(data)
 	      this.setState({allepcomic:data})
 	    })
 
@@ -68,13 +70,9 @@ onRouteChange = (route,id,id_comic,_id) => {
     	this.setState({route: route});
 	    this.setState({idEp:id});
 	    this.setState({idComic:id_comic})
-	    
-	    	console.log("ep home")
-	    	// console.log(id.ch)
-	    	// console.log(id_comic.id)
+	   
 	    	let ch1 = id.ch
 	    	let id1 = id_comic.id 
-		    // this.findidspecific(ch1,id1)
 		    this.gettesthistory(ch1,id1)
 
 	}
@@ -124,9 +122,6 @@ addhistory = () =>{
 
 }
 addview = () =>{
-	console.log("addview")
-	console.log(this.state.testidspecific)
-	console.log(this.state.idComic)
 	fetch('http://localhost:3000/addview', {
 	      method: 'post',
 	      headers: {'Content-Type': 'application/json'},
@@ -193,6 +188,7 @@ componentWillMount() {
     .then(data => {
       this.setState({storeNohistory:data})
     })
+
 }
 recommend (){
 	fetch('http://localhost:3000/recommend', {		//find ep from history
@@ -227,7 +223,7 @@ componentWillReceiveProps(nextProps,nextState) {
 }
 	render(){
 		const { isSignedIn, searchfield, data, route, dataEp, idComic, idEp, 
-			comic, epcomic, allepcomic, history, history3, testhistory, storeNohistory } = this.state;
+			comic, epcomic, allepcomic, history, history3, testhistory, storeNohistory, testnumberhistory } = this.state;
 		const { user ,enter  } = this.props;
 		const filteredData = epcomic.filter(detail =>{ // follow date
 			return detail.name.toLowerCase().includes(searchfield.toLowerCase());
@@ -241,16 +237,16 @@ componentWillReceiveProps(nextProps,nextState) {
 			return detail.name.toLowerCase().includes(searchfield.toLowerCase());
 		})
 		const size = filteredData3.length
+		console.log(testhistory)
 		return(
 				<div>
 					<Search className ="tr" data={comic} value={this.props.value} onRouteChange={this.onRouteChange}/>
-					<br/>
 					{
 						route === 'home'?
 						(
 							<div>
-
-								<h1 className ='tc'>Recommended Manga</h1>
+								<br/>
+								<h1 className ='tc'>Recommend</h1>
 								<Update>
 								{
 									size === 1 ?
@@ -267,11 +263,15 @@ componentWillReceiveProps(nextProps,nextState) {
 						):route === 'allep'?
 						(
 							<div>
-								<AllEp data={comic[idComic.id]} dataEp={allepcomic} onRouteChange={this.onRouteChange} user ={user}/>
+								<br/><br/>
+								<AllEp data={comic[idComic.id]} dataEp={allepcomic} history={testnumberhistory} onRouteChange={this.onRouteChange} user ={user}/>
 							</div>
 						):route === 'ep'?
 						(
-							<DropListEpisodes data={comic} id={idComic.id} ep={idEp.ch} onRouteChange={this.onRouteChange}/>
+							<div>
+								<br/>
+								<DropListEpisodes data={comic} id={idComic.id} ep={idEp.ch} onRouteChange={this.onRouteChange}/>
+							</div>
 						):
 							<h1>else</h1>
 					}

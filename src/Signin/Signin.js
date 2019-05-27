@@ -47,17 +47,6 @@ class Signin extends React.Component {
         })
       }
     })
-
-
-    // fetch('http://localhost:3000/book', {
-    //   method: 'get',
-    //   headers: {'Content-Type': 'application/json'},
-    // })
-    // .then(response => response.text())
-    // .then(data => {
-    //   this.setState({comic:data})
-    // })
-
   }
 
   onEnter = (event) => {
@@ -67,17 +56,17 @@ class Signin extends React.Component {
     }
   }
 
-  onSigninRouteChange = (route,id) => {
-      if (route === 'home') {
-        this.setState({isSignedIn: true})
-      }
-      this.setState({route: route});
-      if(route === 'allep'){
-        this.setState({idComic:id})
-      }else if(route === 'ep'){
-        this.setState({idEp:id})
-      }
-  }
+  // onSigninRouteChange = (route,id) => {
+  //     if (route === 'home') {
+  //       this.setState({isSignedIn: true})
+  //     }
+  //     this.setState({route: route});
+  //     if(route === 'allep'){
+  //       this.setState({idComic:id})
+  //     }else if(route === 'ep'){
+  //       this.setState({idEp:id})
+  //     }
+  // }
 
   render() {
     const { isSignedIn,onRouteChange } = this.props;

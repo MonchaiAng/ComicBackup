@@ -4,7 +4,7 @@ import Sort3 from './Sort3';
 const Sort2 = ({ data, onRouteChange }) => {
 	return (
 		<div>
-			<br/><br/><br/>
+			<br/>
 			<h1>Sort</h1>
 			{
 				data.map((user, i) =>{

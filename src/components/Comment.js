@@ -49,7 +49,12 @@ class Comment extends React.Component {
 		        comment : this.state.comment,
 		      })
 		    })
-		    this.setState({comment:''})
+		    .then(response => response.json())
+    		.then(data => {
+    			if(data === 'succees'){
+	    			this.setState({comment:''})
+				}
+    		})
 		}
 		this.setState({comic:this.props.data._id})
 		this.componentDidMount();
